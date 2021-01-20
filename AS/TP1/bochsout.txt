@@ -1,0 +1,497 @@
+00000000000i[      ] Bochs x86 Emulator 2.6.9
+00000000000i[      ]   Built from SVN snapshot on April 9, 2017
+00000000000i[      ] Compiled on Jan 13 2021 at 10:30:52
+00000000000i[      ] System configuration
+00000000000i[      ]   processors: 1 (cores=1, HT threads=1)
+00000000000i[      ]   A20 line support: yes
+00000000000i[      ] IPS is set to 4000000
+00000000000i[      ] CPU configuration
+00000000000i[      ]   SMP support: no
+00000000000i[      ]   level: 6
+00000000000i[      ]   APIC support: xapic
+00000000000i[      ]   FPU support: yes
+00000000000i[      ]   MMX support: yes
+00000000000i[      ]   3dnow! support: no
+00000000000i[      ]   SEP support: yes
+00000000000i[      ]   SIMD support: sse2
+00000000000i[      ]   XSAVE support: no 
+00000000000i[      ]   AES support: no
+00000000000i[      ]   SHA support: no
+00000000000i[      ]   MOVBE support: no
+00000000000i[      ]   ADX support: no
+00000000000i[      ]   x86-64 support: no
+00000000000i[      ]   MWAIT support: yes
+00000000000i[      ] Optimization configuration
+00000000000i[      ]   RepeatSpeedups support: yes
+00000000000i[      ]   Fast function calls: yes
+00000000000i[      ]   Handlers Chaining speedups: no
+00000000000i[      ] Devices configuration
+00000000000i[      ]   PCI support: i440FX i430FX
+00000000000i[      ]   Networking: no
+00000000000i[      ]   Sound support: no
+00000000000i[      ]   USB support: no
+00000000000i[      ]   VGA extension support: vbe
+00000000000i[MEM0  ] allocated memory at 0x7fdef25f5010. after alignment, vector=0x7fdef25f6000
+00000000000i[MEM0  ] 16,00MB
+00000000000i[MEM0  ] mem block size = 0x00020000, blocks=128
+00000000000i[MEM0  ] rom at 0xfffe0000/131072 ('/usr/local/share/bochs/BIOS-bochs-latest')
+00000000000i[PLUGIN] init_dev of 'pci' plugin device by virtual method
+00000000000i[DEV   ] i440FX PMC present at device 0, function 0
+00000000000i[PLUGIN] init_dev of 'pci2isa' plugin device by virtual method
+00000000000i[DEV   ] PIIX3 PCI-to-ISA bridge present at device 1, function 0
+00000000000i[PLUGIN] init_dev of 'cmos' plugin device by virtual method
+00000000000i[CMOS  ] Using utc time for initial clock
+00000000000i[CMOS  ] Setting initial clock to: Wed Jan 20 11:59:24 2021 (time0=1611140364)
+00000000000i[PLUGIN] init_dev of 'dma' plugin device by virtual method
+00000000000i[DMA   ] channel 4 used by cascade
+00000000000i[PLUGIN] init_dev of 'pic' plugin device by virtual method
+00000000000i[PLUGIN] init_dev of 'pit' plugin device by virtual method
+00000000000i[PLUGIN] init_dev of 'vga' plugin device by virtual method
+00000000000i[MEM0  ] Register memory access handlers: 0x0000000a0000 - 0x0000000bffff
+00000000000i[VGA   ] interval=200000, mode=realtime
+00000000000i[MEM0  ] Register memory access handlers: 0x0000e0000000 - 0x0000e0ffffff
+00000000000i[BXVGA ] VBE Bochs Display Extension Enabled
+00000000000i[MEM0  ] rom at 0xc0000/41472 ('/usr/local/share/bochs/VGABIOS-lgpl-latest')
+00000000000i[PLUGIN] init_dev of 'floppy' plugin device by virtual method
+00000000000i[DMA   ] channel 2 used by Floppy Drive
+00000000000i[FLOPPY] Using boot sequence cdrom, none, none
+00000000000i[FLOPPY] Floppy boot signature check is enabled
+00000000000i[PLUGIN] init_dev of 'acpi' plugin device by virtual method
+00000000000i[DEV   ] ACPI Controller present at device 1, function 3
+00000000000i[PLUGIN] init_dev of 'ioapic' plugin device by virtual method
+00000000000i[IOAPIC] initializing I/O APIC
+00000000000i[MEM0  ] Register memory access handlers: 0x0000fec00000 - 0x0000fec00fff
+00000000000i[IOAPIC] IOAPIC enabled (base address = 0xfec00000)
+00000000000i[PLUGIN] init_dev of 'keyboard' plugin device by virtual method
+00000000000i[KBD   ] will paste characters every 400 keyboard ticks
+00000000000i[PLUGIN] init_dev of 'harddrv' plugin device by virtual method
+00000000000i[HD    ] HD on ata0-0: 'hdd.img', 'flat' mode
+00000000000i[IMG   ] hd_size: 67108864
+00000000000i[HD    ] ata0-0: using specified geometry: CHS=130/16/63
+00000000000i[HD    ] ata0-0: extra data outside of CHS address range
+00000000000i[HD    ] CD on ata0-1: 'nanvix.iso'
+00000000000i[CD1   ] load cdrom with path='nanvix.iso'
+00000000000i[CD1   ] Opening image file as a cd.
+00000000000i[HD    ] Media present in CD-ROM drive
+00000000000i[HD    ] Capacity is 540 sectors (1,05 MB)
+00000000000i[HD    ] translation on ata0-0 set to 'none'
+00000000000i[PLUGIN] init_dev of 'pci_ide' plugin device by virtual method
+00000000000i[DEV   ] PIIX3 PCI IDE controller present at device 1, function 1
+00000000000i[PLUGIN] init_dev of 'unmapped' plugin device by virtual method
+00000000000i[PLUGIN] init_dev of 'biosdev' plugin device by virtual method
+00000000000i[PLUGIN] init_dev of 'speaker' plugin device by virtual method
+00000000000e[PCSPK ] Failed to open /dev/console: Permission non accordée
+00000000000e[PCSPK ] Deactivating beep on console
+00000000000i[PLUGIN] init_dev of 'extfpuirq' plugin device by virtual method
+00000000000i[PLUGIN] init_dev of 'parallel' plugin device by virtual method
+00000000000i[PAR   ] parallel port 1 at 0x0378 irq 7
+00000000000i[PLUGIN] init_dev of 'serial' plugin device by virtual method
+00000000000i[SER   ] com1 at 0x03f8 irq 4 (mode: null)
+00000000000i[PLUGIN] register state of 'pci' plugin device by virtual method
+00000000000i[PLUGIN] register state of 'pci2isa' plugin device by virtual method
+00000000000i[PLUGIN] register state of 'cmos' plugin device by virtual method
+00000000000i[PLUGIN] register state of 'dma' plugin device by virtual method
+00000000000i[PLUGIN] register state of 'pic' plugin device by virtual method
+00000000000i[PLUGIN] register state of 'pit' plugin device by virtual method
+00000000000i[PLUGIN] register state of 'vga' plugin device by virtual method
+00000000000i[PLUGIN] register state of 'floppy' plugin device by virtual method
+00000000000i[PLUGIN] register state of 'unmapped' plugin device by virtual method
+00000000000i[PLUGIN] register state of 'biosdev' plugin device by virtual method
+00000000000i[PLUGIN] register state of 'speaker' plugin device by virtual method
+00000000000i[PLUGIN] register state of 'extfpuirq' plugin device by virtual method
+00000000000i[PLUGIN] register state of 'parallel' plugin device by virtual method
+00000000000i[PLUGIN] register state of 'serial' plugin device by virtual method
+00000000000i[PLUGIN] register state of 'acpi' plugin device by virtual method
+00000000000i[PLUGIN] register state of 'ioapic' plugin device by virtual method
+00000000000i[PLUGIN] register state of 'keyboard' plugin device by virtual method
+00000000000i[PLUGIN] register state of 'harddrv' plugin device by virtual method
+00000000000i[PLUGIN] register state of 'pci_ide' plugin device by virtual method
+00000000000i[SYS   ] bx_pc_system_c::Reset(HARDWARE) called
+00000000000i[CPU0  ] cpu hardware reset
+00000000000i[APIC0 ] allocate APIC id=0 (MMIO enabled) to 0x0000fee00000
+00000000000i[CPU0  ] CPUID[0x00000000]: 00000005 756e6547 6c65746e 49656e69
+00000000000i[CPU0  ] CPUID[0x00000001]: 00000633 00010800 00000008 1fcbfbff
+00000000000i[CPU0  ] CPUID[0x00000002]: 00410601 00000000 00000000 00000000
+00000000000i[CPU0  ] CPUID[0x00000003]: 00000000 00000000 00000000 00000000
+00000000000i[CPU0  ] CPUID[0x00000004]: 00000000 00000000 00000000 00000000
+00000000000i[CPU0  ] CPUID[0x00000005]: 00000040 00000040 00000003 00000020
+00000000000i[CPU0  ] CPUID[0x80000000]: 80000008 00000000 00000000 00000000
+00000000000i[CPU0  ] CPUID[0x80000001]: 00000000 00000000 00000000 00000000
+00000000000i[CPU0  ] CPUID[0x80000002]: 20202020 20202020 20202020 6e492020
+00000000000i[CPU0  ] CPUID[0x80000003]: 286c6574 50202952 69746e65 52286d75
+00000000000i[CPU0  ] CPUID[0x80000004]: 20342029 20555043 20202020 00202020
+00000000000i[CPU0  ] CPUID[0x80000005]: 01ff01ff 01ff01ff 40020140 40020140
+00000000000i[CPU0  ] CPUID[0x80000006]: 00000000 42004200 02008140 00000000
+00000000000i[CPU0  ] CPUID[0x80000007]: 00000000 00000000 00000000 00000000
+00000000000i[CPU0  ] CPUID[0x80000008]: 00002028 00000000 00000000 00000000
+00000000000i[PLUGIN] reset of 'pci' plugin device by virtual method
+00000000000i[PLUGIN] reset of 'pci2isa' plugin device by virtual method
+00000000000i[PLUGIN] reset of 'cmos' plugin device by virtual method
+00000000000i[PLUGIN] reset of 'dma' plugin device by virtual method
+00000000000i[PLUGIN] reset of 'pic' plugin device by virtual method
+00000000000i[PLUGIN] reset of 'pit' plugin device by virtual method
+00000000000i[PLUGIN] reset of 'vga' plugin device by virtual method
+00000000000i[PLUGIN] reset of 'floppy' plugin device by virtual method
+00000000000i[PLUGIN] reset of 'acpi' plugin device by virtual method
+00000000000i[PLUGIN] reset of 'ioapic' plugin device by virtual method
+00000000000i[PLUGIN] reset of 'keyboard' plugin device by virtual method
+00000000000i[PLUGIN] reset of 'harddrv' plugin device by virtual method
+00000000000i[PLUGIN] reset of 'pci_ide' plugin device by virtual method
+00000000000i[PLUGIN] reset of 'unmapped' plugin device by virtual method
+00000000000i[PLUGIN] reset of 'biosdev' plugin device by virtual method
+00000000000i[PLUGIN] reset of 'speaker' plugin device by virtual method
+00000000000i[PLUGIN] reset of 'extfpuirq' plugin device by virtual method
+00000000000i[PLUGIN] reset of 'parallel' plugin device by virtual method
+00000000000i[PLUGIN] reset of 'serial' plugin device by virtual method
+00000004662i[BIOS  ] $Revision: 13073 $ $Date: 2017-02-16 22:43:52 +0100 (Do, 16. Feb 2017) $
+00000318050i[KBD   ] reset-disable command received
+00000320819i[BIOS  ] Starting rombios32
+00000321257i[BIOS  ] Shutdown flag 0
+00000321841i[BIOS  ] ram_size=0x01000000
+00000322262i[BIOS  ] ram_end=16MB
+00000362830i[BIOS  ] Found 1 cpu(s)
+00000376414i[BIOS  ] bios_table_addr: 0x000f9cd8 end=0x000fcc00
+00000704209i[PCI   ] i440FX PMC write to PAM register 59 (TLB Flush)
+00001032138i[P2ISA ] PCI IRQ routing: PIRQA# set to 0x0b
+00001032157i[P2ISA ] PCI IRQ routing: PIRQB# set to 0x09
+00001032176i[P2ISA ] PCI IRQ routing: PIRQC# set to 0x0b
+00001032195i[P2ISA ] PCI IRQ routing: PIRQD# set to 0x09
+00001032205i[P2ISA ] write: ELCR2 = 0x0a
+00001032975i[BIOS  ] PIIX3/PIIX4 init: elcr=00 0a
+00001040656i[BIOS  ] PCI: bus=0 devfn=0x00: vendor_id=0x8086 device_id=0x1237 class=0x0600
+00001042935i[BIOS  ] PCI: bus=0 devfn=0x08: vendor_id=0x8086 device_id=0x7000 class=0x0601
+00001045053i[BIOS  ] PCI: bus=0 devfn=0x09: vendor_id=0x8086 device_id=0x7010 class=0x0101
+00001045282i[PIDE  ] new BM-DMA address: 0xc000
+00001045898i[BIOS  ] region 4: 0x0000c000
+00001047935i[BIOS  ] PCI: bus=0 devfn=0x0b: vendor_id=0x8086 device_id=0x7113 class=0x0680
+00001048167i[ACPI  ] new irq line = 11
+00001048179i[ACPI  ] new irq line = 9
+00001048204i[ACPI  ] new PM base address: 0xb000
+00001048218i[ACPI  ] new SM base address: 0xb100
+00001048246i[PCI   ] setting SMRAM control register to 0x4a
+00001212339i[CPU0  ] Enter to System Management Mode
+00001212350i[CPU0  ] RSM: Resuming from System Management Mode
+00001376371i[PCI   ] setting SMRAM control register to 0x0a
+00001391237i[BIOS  ] MP table addr=0x000f9db0 MPC table addr=0x000f9ce0 size=0xc8
+00001393059i[BIOS  ] SMBIOS table addr=0x000f9dc0
+00001395227i[BIOS  ] ACPI tables: RSDP addr=0x000f9ee0 ACPI DATA addr=0x00ff0000 size=0xf72
+00001398417i[BIOS  ] Firmware waking vector 0xff00cc
+00001400212i[PCI   ] i440FX PMC write to PAM register 59 (TLB Flush)
+00001400935i[BIOS  ] bios_table_cur_addr: 0x000f9f04
+00001528552i[VBIOS ] VGABios $Id: vgabios.c,v 1.76 2013/02/10 08:07:03 vruppert Exp $
+00001528623i[BXVGA ] VBE known Display Interface b0c0
+00001528655i[BXVGA ] VBE known Display Interface b0c5
+00001531580i[VBIOS ] VBE Bios $Id: vbe.c,v 1.65 2014/07/08 18:02:25 vruppert Exp $
+00001876023i[BIOS  ] ata0-0: PCHS=130/16/63 translation=none LCHS=130/16/63
+00014424477i[BIOS  ] Booting from 07c0:0000
+00014530800i[BIOS  ] int13_harddisk: function 41, unmapped device for ELDL=81
+00014534477i[BIOS  ] int13_harddisk: function 08, unmapped device for ELDL=81
+00014538138i[BIOS  ] *** int 15h function AX=00c0, BX=0000 not yet supported!
+00020597549i[HD    ] disk ata1-0 not present, aborting
+00139329569i[TERM  ] ips = 139,330M
+00278680987i[TERM  ] ips = 139,351M
+00424436000i[TERM  ] ips = 145,755M
+00556456972i[TERM  ] ips = 132,021M
+00687894956i[TERM  ] ips = 131,438M
+00826543016i[TERM  ] ips = 138,648M
+00967998048i[TERM  ] ips = 141,455M
+01108930154i[TERM  ] ips = 140,932M
+01248970226i[TERM  ] ips = 140,040M
+01380048563i[TERM  ] ips = 131,078M
+01518506798i[TERM  ] ips = 138,458M
+01655676000i[TERM  ] ips = 137,169M
+01792804429i[TERM  ] ips = 137,128M
+01925536706i[TERM  ] ips = 132,732M
+02068031253i[TERM  ] ips = 142,495M
+02207100766i[TERM  ] ips = 139,070M
+02348091813i[TERM  ] ips = 140,991M
+02488094018i[TERM  ] ips = 140,002M
+02629075314i[TERM  ] ips = 140,981M
+02770259492i[TERM  ] ips = 141,184M
+02907109190i[TERM  ] ips = 136,850M
+03050434509i[TERM  ] ips = 143,325M
+03189372797i[TERM  ] ips = 138,938M
+03324614798i[TERM  ] ips = 135,242M
+03464675649i[TERM  ] ips = 140,061M
+03598471306i[TERM  ] ips = 133,796M
+03723991241i[TERM  ] ips = 125,520M
+03869661334i[TERM  ] ips = 145,670M
+04015297000i[TERM  ] ips = 145,636M
+04164052331i[TERM  ] ips = 148,755M
+04307282947i[TERM  ] ips = 143,231M
+04440770163i[TERM  ] ips = 133,487M
+04571992108i[TERM  ] ips = 131,222M
+04714084460i[TERM  ] ips = 142,092M
+04858423354i[TERM  ] ips = 144,339M
+05004129000i[TERM  ] ips = 145,706M
+05151928376i[TERM  ] ips = 147,799M
+05300205099i[TERM  ] ips = 148,277M
+05445458941i[TERM  ] ips = 145,254M
+05575492373i[TERM  ] ips = 130,033M
+05715749182i[TERM  ] ips = 140,257M
+05863455445i[TERM  ] ips = 147,706M
+06001567024i[TERM  ] ips = 138,112M
+06144611093i[TERM  ] ips = 143,044M
+06289527128i[TERM  ] ips = 144,916M
+06432471819i[TERM  ] ips = 142,945M
+06568448715i[TERM  ] ips = 135,977M
+06714346492i[TERM  ] ips = 145,898M
+06860543658i[TERM  ] ips = 146,197M
+07006105426i[TERM  ] ips = 145,562M
+07148883570i[TERM  ] ips = 142,778M
+07286619434i[TERM  ] ips = 137,736M
+07431338488i[TERM  ] ips = 144,719M
+07562820323i[TERM  ] ips = 131,482M
+07687958795i[TERM  ] ips = 125,138M
+07834179992i[TERM  ] ips = 146,221M
+07978316969i[TERM  ] ips = 144,137M
+08105019946i[TERM  ] ips = 126,703M
+08246464000i[TERM  ] ips = 141,444M
+08384167961i[TERM  ] ips = 137,704M
+08532008865i[TERM  ] ips = 147,841M
+08665618441i[TERM  ] ips = 133,610M
+08796474247i[TERM  ] ips = 130,856M
+08917672487i[TERM  ] ips = 121,198M
+09060288932i[TERM  ] ips = 142,616M
+09202871722i[TERM  ] ips = 142,583M
+09318071690i[TERM  ] ips = 115,200M
+09463157450i[TERM  ] ips = 145,086M
+09586045866i[TERM  ] ips = 122,888M
+09716750140i[TERM  ] ips = 130,704M
+09847374256i[TERM  ] ips = 130,624M
+09981094510i[TERM  ] ips = 133,720M
+10113000843i[TERM  ] ips = 131,906M
+10234859000i[TERM  ] ips = 121,858M
+10355388000i[TERM  ] ips = 120,529M
+10485659303i[TERM  ] ips = 130,271M
+10623043990i[TERM  ] ips = 137,385M
+10755330332i[TERM  ] ips = 132,286M
+10888889750i[TERM  ] ips = 133,559M
+11023079279i[TERM  ] ips = 134,190M
+11147326838i[TERM  ] ips = 124,248M
+11291276833i[TERM  ] ips = 143,950M
+11436463480i[TERM  ] ips = 145,187M
+11583439157i[TERM  ] ips = 146,976M
+11724893525i[TERM  ] ips = 141,454M
+11863907117i[TERM  ] ips = 139,014M
+11984983834i[TERM  ] ips = 121,077M
+12127635011i[TERM  ] ips = 142,651M
+12268551643i[TERM  ] ips = 140,917M
+12410711555i[TERM  ] ips = 142,160M
+12558238301i[TERM  ] ips = 147,527M
+12710654441i[TERM  ] ips = 152,416M
+12837327675i[TERM  ] ips = 126,673M
+12973389794i[TERM  ] ips = 136,062M
+13124831847i[TERM  ] ips = 151,442M
+13260358085i[TERM  ] ips = 135,526M
+13407866551i[TERM  ] ips = 147,508M
+13557443139i[TERM  ] ips = 149,577M
+13702546651i[TERM  ] ips = 145,104M
+13845186451i[TERM  ] ips = 142,640M
+13993342221i[TERM  ] ips = 148,156M
+14142929235i[TERM  ] ips = 149,587M
+14290642336i[TERM  ] ips = 147,713M
+14438310711i[TERM  ] ips = 147,668M
+14586094397i[TERM  ] ips = 147,784M
+14728114957i[TERM  ] ips = 142,021M
+14879594678i[TERM  ] ips = 151,480M
+15035642812i[TERM  ] ips = 156,048M
+15182871969i[TERM  ] ips = 147,229M
+15330215023i[TERM  ] ips = 147,343M
+15486563749i[TERM  ] ips = 156,349M
+15640438158i[TERM  ] ips = 153,874M
+15793361834i[TERM  ] ips = 152,924M
+15929781018i[TERM  ] ips = 136,419M
+16077451707i[TERM  ] ips = 147,671M
+16225262717i[TERM  ] ips = 147,811M
+16371168000i[TERM  ] ips = 145,905M
+16523537369i[TERM  ] ips = 152,369M
+16672690292i[TERM  ] ips = 149,153M
+16827081052i[TERM  ] ips = 154,391M
+16979695988i[TERM  ] ips = 152,615M
+17135493564i[TERM  ] ips = 155,798M
+17282550738i[TERM  ] ips = 147,057M
+17432537020i[TERM  ] ips = 149,986M
+17585910718i[TERM  ] ips = 153,374M
+17742703836i[TERM  ] ips = 156,793M
+17898552085i[TERM  ] ips = 155,848M
+18044549222i[TERM  ] ips = 145,997M
+18198323165i[TERM  ] ips = 153,774M
+18350769453i[TERM  ] ips = 152,446M
+18504160294i[TERM  ] ips = 153,391M
+18658586371i[TERM  ] ips = 154,426M
+18803557572i[TERM  ] ips = 144,971M
+18929523061i[TERM  ] ips = 125,965M
+19074447349i[TERM  ] ips = 144,924M
+19227530784i[TERM  ] ips = 153,083M
+19379558576i[TERM  ] ips = 152,028M
+19492211372i[TERM  ] ips = 112,653M
+19622255725i[TERM  ] ips = 130,044M
+19758320775i[TERM  ] ips = 136,065M
+19864583232i[TERM  ] ips = 106,262M
+19981036227i[TERM  ] ips = 116,453M
+20098846689i[TERM  ] ips = 117,810M
+20204066247i[TERM  ] ips = 105,220M
+20304308205i[TERM  ] ips = 100,242M
+20448768000i[TERM  ] ips = 144,460M
+20598179172i[TERM  ] ips = 149,411M
+20745951773i[TERM  ] ips = 147,773M
+20890285364i[TERM  ] ips = 144,334M
+21026194439i[TERM  ] ips = 135,909M
+21171349064i[TERM  ] ips = 145,155M
+21308059249i[TERM  ] ips = 136,710M
+21452134346i[TERM  ] ips = 144,075M
+21577509128i[TERM  ] ips = 125,375M
+21729245833i[TERM  ] ips = 151,737M
+21879858774i[TERM  ] ips = 150,613M
+22030498167i[TERM  ] ips = 150,639M
+22184250221i[TERM  ] ips = 153,752M
+22325911804i[TERM  ] ips = 141,662M
+22466866256i[TERM  ] ips = 140,954M
+22623392735i[TERM  ] ips = 156,526M
+22781171950i[TERM  ] ips = 157,779M
+22933853472i[TERM  ] ips = 152,682M
+23084468164i[TERM  ] ips = 150,615M
+23239203702i[TERM  ] ips = 154,736M
+23393577784i[TERM  ] ips = 154,374M
+23544705700i[TERM  ] ips = 151,128M
+23702339852i[TERM  ] ips = 157,634M
+23859354555i[TERM  ] ips = 157,015M
+24015648000i[TERM  ] ips = 156,293M
+24167892089i[TERM  ] ips = 152,244M
+24322132040i[TERM  ] ips = 154,240M
+24473246611i[TERM  ] ips = 151,115M
+24624122018i[TERM  ] ips = 150,875M
+24778403336i[TERM  ] ips = 154,281M
+24935732776i[TERM  ] ips = 157,329M
+25089864996i[TERM  ] ips = 154,132M
+25243493210i[TERM  ] ips = 153,628M
+25393517138i[TERM  ] ips = 150,024M
+25540927842i[TERM  ] ips = 147,411M
+25675249408i[TERM  ] ips = 134,322M
+25826605884i[TERM  ] ips = 151,356M
+25976026901i[TERM  ] ips = 149,421M
+26093853500i[TERM  ] ips = 117,827M
+26246548225i[TERM  ] ips = 152,695M
+26397820075i[TERM  ] ips = 151,272M
+26552050117i[TERM  ] ips = 154,230M
+26703623478i[TERM  ] ips = 151,573M
+26843989571i[TERM  ] ips = 140,366M
+27000777933i[TERM  ] ips = 156,788M
+27158653643i[TERM  ] ips = 157,876M
+27317547810i[TERM  ] ips = 158,894M
+27473989188i[TERM  ] ips = 156,441M
+27616480593i[TERM  ] ips = 142,491M
+27766515525i[TERM  ] ips = 150,035M
+27911492744i[TERM  ] ips = 144,977M
+28052470207i[TERM  ] ips = 140,977M
+28193463438i[TERM  ] ips = 140,993M
+28348234880i[TERM  ] ips = 154,771M
+28503631474i[TERM  ] ips = 155,397M
+28661077469i[TERM  ] ips = 157,446M
+28818517561i[TERM  ] ips = 157,440M
+28974826515i[TERM  ] ips = 156,309M
+29129869037i[TERM  ] ips = 155,043M
+29267722244i[TERM  ] ips = 137,853M
+29421139965i[TERM  ] ips = 153,418M
+29565450457i[TERM  ] ips = 144,310M
+29707322426i[TERM  ] ips = 141,872M
+29860330514i[TERM  ] ips = 153,008M
+30010459188i[TERM  ] ips = 150,129M
+30162461699i[TERM  ] ips = 152,003M
+30316439578i[TERM  ] ips = 153,978M
+30468225897i[TERM  ] ips = 151,786M
+30619942812i[TERM  ] ips = 151,717M
+30767768169i[TERM  ] ips = 147,825M
+30890013174i[TERM  ] ips = 122,245M
+31041036030i[TERM  ] ips = 151,023M
+31195827848i[TERM  ] ips = 154,792M
+31348693514i[TERM  ] ips = 152,866M
+31503628306i[TERM  ] ips = 154,935M
+31653737298i[TERM  ] ips = 150,109M
+31802077701i[TERM  ] ips = 148,340M
+31951749214i[TERM  ] ips = 149,672M
+32100974118i[TERM  ] ips = 149,225M
+32253389570i[TERM  ] ips = 152,415M
+32393575832i[TERM  ] ips = 140,186M
+32535520924i[TERM  ] ips = 141,945M
+32672168157i[TERM  ] ips = 136,647M
+32825064000i[TERM  ] ips = 152,896M
+32971979158i[TERM  ] ips = 146,915M
+33122763974i[TERM  ] ips = 150,785M
+33273750124i[TERM  ] ips = 150,986M
+33419533854i[TERM  ] ips = 145,784M
+33566861627i[TERM  ] ips = 147,328M
+33714972290i[TERM  ] ips = 148,111M
+33864467919i[TERM  ] ips = 149,496M
+34015285281i[TERM  ] ips = 150,817M
+34166511472i[TERM  ] ips = 151,226M
+34322375598i[TERM  ] ips = 155,864M
+34476617472i[TERM  ] ips = 154,242M
+34616923620i[TERM  ] ips = 140,306M
+34771281807i[TERM  ] ips = 154,358M
+34924524884i[TERM  ] ips = 153,243M
+35070647399i[TERM  ] ips = 146,123M
+35222321426i[TERM  ] ips = 151,674M
+35378023783i[TERM  ] ips = 155,702M
+35528078301i[TERM  ] ips = 150,055M
+35683478023i[TERM  ] ips = 155,400M
+35834140461i[TERM  ] ips = 150,662M
+35977758874i[TERM  ] ips = 143,618M
+36121405443i[TERM  ] ips = 143,647M
+36277410019i[TERM  ] ips = 156,005M
+36398795940i[TERM  ] ips = 121,386M
+36554337157i[TERM  ] ips = 155,541M
+36711348267i[TERM  ] ips = 157,011M
+36868090979i[TERM  ] ips = 156,743M
+37028017325i[TERM  ] ips = 159,926M
+37185835702i[TERM  ] ips = 157,818M
+37340734089i[TERM  ] ips = 154,898M
+37500776765i[TERM  ] ips = 160,043M
+37659404589i[TERM  ] ips = 158,628M
+37818103509i[TERM  ] ips = 158,699M
+37974792016i[TERM  ] ips = 156,689M
+38131684610i[TERM  ] ips = 156,893M
+38287040852i[TERM  ] ips = 155,356M
+38445723400i[TERM  ] ips = 158,683M
+38601311870i[TERM  ] ips = 155,588M
+38760393938i[TERM  ] ips = 159,082M
+38917952465i[TERM  ] ips = 157,559M
+39066276183i[TERM  ] ips = 148,324M
+39225612266i[TERM  ] ips = 159,336M
+39383558213i[TERM  ] ips = 157,946M
+39541674511i[TERM  ] ips = 158,116M
+39690781360i[TERM  ] ips = 149,107M
+39849585849i[TERM  ] ips = 158,804M
+40009048944i[TERM  ] ips = 159,463M
+40167921815i[TERM  ] ips = 158,873M
+40317154387i[TERM  ] ips = 149,233M
+40472458390i[TERM  ] ips = 155,304M
+40630533319i[TERM  ] ips = 158,075M
+40790840014i[TERM  ] ips = 160,307M
+40949796000i[TERM  ] ips = 158,956M
+41076203569i[TERM  ] ips = 126,408M
+41229437744i[TERM  ] ips = 153,234M
+41388284501i[TERM  ] ips = 158,847M
+41545756980i[TERM  ] ips = 157,472M
+41695326203i[TERM  ] ips = 149,569M
+41851909995i[TERM  ] ips = 156,584M
+42008789076i[TERM  ] ips = 156,879M
+42167693688i[TERM  ] ips = 158,905M
+42323989502i[TERM  ] ips = 156,296M
+42483056364i[TERM  ] ips = 159,067M
+42641639287i[TERM  ] ips = 158,583M
+42797428992i[TERM  ] ips = 155,790M
+42955049524i[TERM  ] ips = 157,621M
+43112191605i[TERM  ] ips = 157,142M
+43270250261i[TERM  ] ips = 158,059M
+43429375602i[TERM  ] ips = 159,125M
+43586313919i[TERM  ] ips = 156,938M
+43734995069i[TERM  ] ips = 148,681M
+43886283775i[TERM  ] ips = 151,289M
+44044142572i[TERM  ] ips = 157,859M
+44190578600i[TERM  ] ips = 146,436M
+44338918451i[TERM  ] ips = 148,340M
+44495488000i[TERM  ] ips = 156,570M
+44647794596i[TERM  ] ips = 152,307M
+44798321076i[TERM  ] ips = 150,526M
