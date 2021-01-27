@@ -204,6 +204,7 @@
     	unsigned alarm;          /**< Alarm.                  */
 		struct process *next;    /**< Next process in a list. */
 		struct process **chain;  /**< Sleeping chain.         */
+		int nbsched; 			 /**< Accumates the number of calls of the func sched */	
 		/**@}*/
 	};
 	
@@ -285,6 +286,8 @@
 	EXTERN struct process *last_proc;
 	EXTERN pid_t next_pid;
 	EXTERN unsigned nprocs;
+
+
 
 #endif /* _ASM_FILE */
 

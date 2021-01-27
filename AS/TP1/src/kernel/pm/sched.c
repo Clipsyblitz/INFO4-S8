@@ -29,11 +29,30 @@
  * 
  * @param proc Process to be scheduled.
  */
+
+/*
 PUBLIC void sched(struct process *proc)
 {
 	proc->state = PROC_READY;
 	proc->counter = 0;
-	//proc->queue...
+}
+*/
+PUBLIC void sched(struct process *proc)
+{
+	proc->state = PROC_READY;
+	proc->counter = 0;
+	// if (queue == NULL){
+	// 	for(int i =0; i<4;i++)
+	// 		queue[i]= (struct process *)malloc(sizeof(struct process));
+	// }
+	proc->nbsched++;
+	int i;
+	for (i = 0; i < 4; i++)
+		if (proc->nice <= -10 + 10 * i)
+			break;
+
+	if (-10 + 10 * (i + proc->nbsched) > 20)
+		proc->nbsched = 0;
 }
 
 /**
@@ -63,8 +82,79 @@ PUBLIC void resume(struct process *proc)
 /**
  * @brief Yields the processor.
  */
-PUBLIC void yield(void) {
+PUBLIC void yield(void)
+{
+	struct process *queue[4];
+	struct process *p;	  /* Working process.     */
+	struct process *next; /* Next process to run. */
 
+	for (p = FIRST_PROC; p <= LAST_PROC; p++)
+		for (int i = 0; i < 4; i++)
+			if (p->nice <= -10 + 10 * (i + p->nbsched))
+			{
+				// Ajout d'un process dans une queue vide
+				if (queue[i] == NULL)
+				{
+					queue[i] = p;
+					queue[i]->next = NULL;
+				}
+				// Ajout d'un process dans une queue en deuxième position
+				else
+				{
+					p->next = queue[i]->next;
+					queue[i]->next = p;
+				}
+				break;
+			}
+
+	/* Re-schedule process for execution. */
+	if (curr_proc->state == PROC_RUNNING)
+		sched(curr_proc);
+
+	/* Remember this process. */
+	last_proc = curr_proc;
+
+	/* Check alarm. */
+	for (p = FIRST_PROC; p <= LAST_PROC; p++)
+	{
+		/* Skip invalid processes. */
+		if (!IS_VALID(p))
+			continue;
+
+		/* Alarm has expired. */
+		if ((p->alarm) && (p->alarm < ticks))
+			p->alarm = 0, sndsig(p, SIGALRM);
+	}
+
+	/* Choose a process to run next. */
+	next = IDLE;
+	next->counter = 0;
+
+	for (int i = 0; i < 4; i++)
+	{
+		p = queue[i];
+		while (p != NULL)
+		{
+			if (p->priority - p->counter < next->priority - next->counter)
+			{
+				next->counter++;
+				next = p;
+			}
+			else
+				p->counter++;
+
+			p = p->next;
+		}
+		if (next != IDLE)
+			break;
+	}
+
+	/* Switch to next process. */
+	next->priority = PRIO_USER;
+	next->state = PROC_RUNNING;
+	next->counter = PROC_QUANTUM;
+	if (curr_proc != next)
+		switch_to(next);
 }
 
 // /**
