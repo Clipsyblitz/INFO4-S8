@@ -86,11 +86,12 @@ PUBLIC void yield(void)
 	/* Re-schedule process for execution. */
 	if (curr_proc->state == PROC_RUNNING)
 	{
-		p->nbsched++;
+		curr_proc->nbsched++;
 		sched(curr_proc);
 	}
 
 	for (p = FIRST_PROC; p <= LAST_PROC; p++)
+	{
 		for (int i = 0; i < 4; i++)
 			if (p->nice <= 10 * (i + 1 + p->nbsched))
 			{
@@ -108,6 +109,7 @@ PUBLIC void yield(void)
 				}
 				break;
 			}
+	}
 
 	/* Remember this process. */
 	last_proc = curr_proc;
