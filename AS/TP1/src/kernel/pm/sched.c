@@ -41,16 +41,12 @@ PUBLIC void sched(struct process *proc)
 {
 	proc->state = PROC_READY;
 	proc->counter = 0;
-	// if (queue == NULL){
-	// 	for(int i =0; i<4;i++)
-	// 		queue[i]= (struct process *)malloc(sizeof(struct process));
-	// }
 	int i;
 	for (i = 0; i < 4; i++)
-		if (proc->nice <= 10 * (i+1))
+		if (proc->nice <= 10 * (i + 1))
 			break;
 
-	if ( 10 * (i + proc->nbsched) > 40)
+	if (10 * (i + proc->nbsched) > 40)
 		proc->nbsched = 0;
 }
 
@@ -87,30 +83,31 @@ PUBLIC void yield(void)
 	struct process *p;	  /* Working process.     */
 	struct process *next; /* Next process to run. */
 
+	/* Re-schedule process for execution. */
+	if (curr_proc->state == PROC_RUNNING)
+	{
+		p->nbsched++;
+		sched(curr_proc);
+	}
+
 	for (p = FIRST_PROC; p <= LAST_PROC; p++)
 		for (int i = 0; i < 4; i++)
-			if (p->nice <=  10 * (i + 1 + p->nbsched))
+			if (p->nice <= 10 * (i + 1 + p->nbsched))
 			{
 				// Ajout d'un process dans une queue vide
 				if (queue[i] == NULL)
 				{
 					queue[i] = p;
-					queue[i]->next = NULL;
+					queue[i]->queue_next = NULL;
 				}
 				// Ajout d'un process dans une queue en deuxième position
 				else
 				{
-					p->next = queue[i]->next;
-					queue[i]->next = p;
+					p->queue_next = queue[i]->queue_next;
+					queue[i]->queue_next = p;
 				}
 				break;
 			}
-
-	/* Re-schedule process for execution. */
-	if (curr_proc->state == PROC_RUNNING){
-		p->nbsched++;
-		sched(curr_proc);
-	}
 
 	/* Remember this process. */
 	last_proc = curr_proc;
@@ -131,21 +128,42 @@ PUBLIC void yield(void)
 	next = IDLE;
 	next->counter = 0;
 
+#define N 1
+#define P 1
+#define C -1
+
 	for (int i = 0; i < 4; i++)
 	{
+		int prio_p;
+		int prio_next;
+
 		p = queue[i];
 		while (p != NULL)
 		{
-			if (p->priority + p->counter < next->priority + next->counter)
+			prio_p = P * p->priority + N * p->nice + C * p->counter;
+			prio_next = P * next->priority + N * next->nice + C * next->counter;
+
+			if (prio_p < prio_next)
 			{
 				next->counter++;
 				next = p;
 			}
+			else if (prio_p == prio_next)
+			{
+				if (p->nice <= next->nice)
+				{
+					next->counter++;
+					next = p;
+				}
+				else
+					p->counter++;
+			}
 			else
 				p->counter++;
 
-			p = p->next;
+			p = p->queue_next;
 		}
+
 		if (next != IDLE)
 			break;
 	}
