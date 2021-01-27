@@ -112,6 +112,8 @@ while [ "$1" != "" ]; do
     shift
 done
 
+rm -f hdd.img.lock
+
 config_bochs
 
 bochs -q -f tools/run/bochsrc.txt
