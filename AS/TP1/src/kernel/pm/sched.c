@@ -45,10 +45,9 @@ PUBLIC void sched(struct process *proc)
 	// 	for(int i =0; i<4;i++)
 	// 		queue[i]= (struct process *)malloc(sizeof(struct process));
 	// }
-	proc->nbsched++;
 	int i;
 	for (i = 0; i < 4; i++)
-		if (proc->nice <= 10 * i)
+		if (proc->nice <= 10 * (i+1))
 			break;
 
 	if ( 10 * (i + proc->nbsched) > 40)
@@ -90,7 +89,7 @@ PUBLIC void yield(void)
 
 	for (p = FIRST_PROC; p <= LAST_PROC; p++)
 		for (int i = 0; i < 4; i++)
-			if (p->nice <=  10 * (i + p->nbsched))
+			if (p->nice <=  10 * (i + 1 + p->nbsched))
 			{
 				// Ajout d'un process dans une queue vide
 				if (queue[i] == NULL)
@@ -108,8 +107,10 @@ PUBLIC void yield(void)
 			}
 
 	/* Re-schedule process for execution. */
-	if (curr_proc->state == PROC_RUNNING)
+	if (curr_proc->state == PROC_RUNNING){
+		p->nbsched++;
 		sched(curr_proc);
+	}
 
 	/* Remember this process. */
 	last_proc = curr_proc;
@@ -135,7 +136,7 @@ PUBLIC void yield(void)
 		p = queue[i];
 		while (p != NULL)
 		{
-			if (p->counter < next->counter)
+			if (p->priority + p->counter < next->priority + next->counter)
 			{
 				next->counter++;
 				next = p;
