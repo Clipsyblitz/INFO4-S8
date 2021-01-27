@@ -48,10 +48,10 @@ PUBLIC void sched(struct process *proc)
 	proc->nbsched++;
 	int i;
 	for (i = 0; i < 4; i++)
-		if (proc->nice <= -10 + 10 * i)
+		if (proc->nice <= 10 * i)
 			break;
 
-	if (-10 + 10 * (i + proc->nbsched) > 20)
+	if ( 10 * (i + proc->nbsched) > 40)
 		proc->nbsched = 0;
 }
 
@@ -90,7 +90,7 @@ PUBLIC void yield(void)
 
 	for (p = FIRST_PROC; p <= LAST_PROC; p++)
 		for (int i = 0; i < 4; i++)
-			if (p->nice <= -10 + 10 * (i + p->nbsched))
+			if (p->nice <=  10 * (i + p->nbsched))
 			{
 				// Ajout d'un process dans une queue vide
 				if (queue[i] == NULL)
@@ -135,7 +135,7 @@ PUBLIC void yield(void)
 		p = queue[i];
 		while (p != NULL)
 		{
-			if (p->priority - p->counter < next->priority - next->counter)
+			if (p->counter < next->counter)
 			{
 				next->counter++;
 				next = p;
