@@ -33,6 +33,7 @@ PUBLIC void sched(struct process *proc)
 {
 	proc->state = PROC_READY;
 	proc->counter = 0;
+	//proc->queue...
 }
 
 /**
@@ -62,75 +63,82 @@ PUBLIC void resume(struct process *proc)
 /**
  * @brief Yields the processor.
  */
-PUBLIC void yield(void)
-{
-	struct process *p;	  /* Working process.     */
-	struct process *next; /* Next process to run. */
+PUBLIC void yield(void) {
 
-	/* Re-schedule process for execution. */
-	if (curr_proc->state == PROC_RUNNING)
-		sched(curr_proc);
-
-	/* Remember this process. */
-	last_proc = curr_proc;
-
-	/* Check alarm. */
-	for (p = FIRST_PROC; p <= LAST_PROC; p++)
-	{
-		/* Skip invalid processes. */
-		if (!IS_VALID(p))
-			continue;
-
-		/* Alarm has expired. */
-		if ((p->alarm) && (p->alarm < ticks))
-			p->alarm = 0, sndsig(p, SIGALRM);
-	}
-
-	/* Choose a process to run next. */
-	next = IDLE;
-	next->counter = 0;
-
-	for (p = FIRST_PROC; p <= LAST_PROC; p++)
-	{
-		/* Skip non-ready process. */
-		if (p->state != PROC_READY)
-			continue;
-
-			/*
-		 * Process with higher
-		 * waiting time found.
-		 */
-
-#define N 1
-#define P 1
-#define C -1
-
-		int prio_p = P * p->priority + N * p->nice + C * p->counter;
-		int prio_next = P * next->priority + N * next->nice + C * next->counter;
-
-		if (prio_p < prio_next)
-		{
-			next->counter++;
-			next = p;
-		}
-		else if (prio_p == prio_next)
-		{
-			if (p->nice <= next->nice)
-			{
-				next->counter++;
-				next = p;
-			}
-			else
-				p->counter++;
-		}
-		else
-			p->counter++;
-	}
-
-	/* Switch to next process. */
-	next->priority = PRIO_USER;
-	next->state = PROC_RUNNING;
-	next->counter = PROC_QUANTUM;
-	if (curr_proc != next)
-		switch_to(next);
 }
+
+// /**
+//  * @brief Yields the processor.
+//  */
+// PUBLIC void yield(void)
+// {
+// 	struct process *p;	  /* Working process.     */
+// 	struct process *next; /* Next process to run. */
+
+// 	/* Re-schedule process for execution. */
+// 	if (curr_proc->state == PROC_RUNNING)
+// 		sched(curr_proc);
+
+// 	/* Remember this process. */
+// 	last_proc = curr_proc;
+
+// 	/* Check alarm. */
+// 	for (p = FIRST_PROC; p <= LAST_PROC; p++)
+// 	{
+// 		/* Skip invalid processes. */
+// 		if (!IS_VALID(p))
+// 			continue;
+
+// 		/* Alarm has expired. */
+// 		if ((p->alarm) && (p->alarm < ticks))
+// 			p->alarm = 0, sndsig(p, SIGALRM);
+// 	}
+
+// 	/* Choose a process to run next. */
+// 	next = IDLE;
+// 	next->counter = 0;
+
+// 	for (p = FIRST_PROC; p <= LAST_PROC; p++)
+// 	{
+// 		/* Skip non-ready process. */
+// 		if (p->state != PROC_READY)
+// 			continue;
+
+// 			/*
+// 		 * Process with higher
+// 		 * waiting time found.
+// 		 */
+
+// #define N 1
+// #define P 1
+// #define C -1
+
+// 		int prio_p = P * p->priority + N * p->nice + C * p->counter;
+// 		int prio_next = P * next->priority + N * next->nice + C * next->counter;
+
+// 		if (prio_p < prio_next)
+// 		{
+// 			next->counter++;
+// 			next = p;
+// 		}
+// 		else if (prio_p == prio_next)
+// 		{
+// 			if (p->nice <= next->nice)
+// 			{
+// 				next->counter++;
+// 				next = p;
+// 			}
+// 			else
+// 				p->counter++;
+// 		}
+// 		else
+// 			p->counter++;
+// 	}
+
+// 	/* Switch to next process. */
+// 	next->priority = PRIO_USER;
+// 	next->state = PROC_RUNNING;
+// 	next->counter = PROC_QUANTUM;
+// 	if (curr_proc != next)
+// 		switch_to(next);
+//}
