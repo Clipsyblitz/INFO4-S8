@@ -31,7 +31,7 @@
 00000000000i[      ]   Sound support: no
 00000000000i[      ]   USB support: no
 00000000000i[      ]   VGA extension support: vbe
-00000000000i[MEM0  ] allocated memory at 0x7f743ed0e010. after alignment, vector=0x7f743ed0f000
+00000000000i[MEM0  ] allocated memory at 0x7f01eb58b010. after alignment, vector=0x7f01eb58c000
 00000000000i[MEM0  ] 16,00MB
 00000000000i[MEM0  ] mem block size = 0x00020000, blocks=128
 00000000000i[MEM0  ] rom at 0xfffe0000/131072 ('/usr/local/share/bochs/BIOS-bochs-latest')
@@ -41,7 +41,7 @@
 00000000000i[DEV   ] PIIX3 PCI-to-ISA bridge present at device 1, function 0
 00000000000i[PLUGIN] init_dev of 'cmos' plugin device by virtual method
 00000000000i[CMOS  ] Using utc time for initial clock
-00000000000i[CMOS  ] Setting initial clock to: Wed Feb  3 11:27:43 2021 (time0=1612348063)
+00000000000i[CMOS  ] Setting initial clock to: Wed Feb  3 16:54:41 2021 (time0=1612367681)
 00000000000i[PLUGIN] init_dev of 'dma' plugin device by virtual method
 00000000000i[DMA   ] channel 4 used by cascade
 00000000000i[PLUGIN] init_dev of 'pic' plugin device by virtual method
@@ -187,58 +187,48 @@
 00014530800i[BIOS  ] int13_harddisk: function 41, unmapped device for ELDL=81
 00014534477i[BIOS  ] int13_harddisk: function 08, unmapped device for ELDL=81
 00014538138i[BIOS  ] *** int 15h function AX=00c0, BX=0000 not yet supported!
-00020599942i[HD    ] disk ata1-0 not present, aborting
-00148811948i[TERM  ] ips = 148,812M
-00290139238i[TERM  ] ips = 141,327M
-00435166720i[TERM  ] ips = 145,027M
-00580677355i[TERM  ] ips = 145,511M
-00727928882i[TERM  ] ips = 147,252M
-00877626549i[TERM  ] ips = 149,698M
-00990422216i[TERM  ] ips = 112,796M
-01112900269i[TERM  ] ips = 122,478M
-01246287327i[TERM  ] ips = 133,387M
-01376334838i[TERM  ] ips = 130,048M
-01507529698i[TERM  ] ips = 131,195M
-01639732061i[TERM  ] ips = 132,202M
-01769110260i[TERM  ] ips = 129,378M
-01901466448i[TERM  ] ips = 132,356M
-02031832286i[TERM  ] ips = 130,366M
-02177277372i[TERM  ] ips = 145,445M
-02321296231i[TERM  ] ips = 144,019M
-02466839462i[TERM  ] ips = 145,543M
-02612843687i[TERM  ] ips = 146,004M
-02754556103i[TERM  ] ips = 141,712M
-02901536037i[TERM  ] ips = 146,980M
-03037758095i[TERM  ] ips = 136,222M
-03179484448i[TERM  ] ips = 141,726M
-03320656768i[TERM  ] ips = 141,172M
-03453191723i[TERM  ] ips = 132,535M
-03601987156i[TERM  ] ips = 148,795M
-03746284833i[TERM  ] ips = 144,298M
-03890013105i[TERM  ] ips = 143,728M
-04036519953i[TERM  ] ips = 146,507M
-04181291735i[TERM  ] ips = 144,772M
-04305716528i[TERM  ] ips = 124,425M
-04452309482i[TERM  ] ips = 146,593M
-04523587663p[TERM  ] >>PANIC<< Received SIGHUP: quit simulation
-04523587663i[CPU0  ] CPU is in protected mode (active)
-04523587663i[CPU0  ] CS.mode = 32 bit
-04523587663i[CPU0  ] SS.mode = 32 bit
-04523587663i[CPU0  ] EFER   = 0x00000000
-04523587663i[CPU0  ] | EAX=00000000  EBX=001d0007  ECX=00000014  EDX=0000000c
-04523587663i[CPU0  ] | ESP=c014763c  EBP=c0147654  ESI=0002bab0  EDI=00100ffc
-04523587663i[CPU0  ] | IOPL=0 id vip vif ac vm rf nt of df IF tf SF zf AF pf CF
-04523587663i[CPU0  ] | SEG sltr(index|ti|rpl)     base    limit G D
-04523587663i[CPU0  ] |  CS:0008( 0001| 0|  0) 00000000 ffffffff 1 1
-04523587663i[CPU0  ] |  DS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
-04523587663i[CPU0  ] |  SS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
-04523587663i[CPU0  ] |  ES:0000( 0002| 0|  0) 00000000 ffffffff 1 1
-04523587663i[CPU0  ] |  FS:0000( 0002| 0|  0) 00000000 ffffffff 1 1
-04523587663i[CPU0  ] |  GS:0000( 0002| 0|  0) 00000000 ffffffff 1 1
-04523587663i[CPU0  ] | EIP=c0110de0 (c0110ddd)
-04523587663i[CPU0  ] | CR0=0xe0000011 CR2=0x100008d8
-04523587663i[CPU0  ] | CR3=0x00104000 CR4=0x00000000
-04523587663i[CPU0  ] 0xc0110ddd>> mov eax, dword ptr ss:[ebp-12] : 8B45F4
-04523587663i[CMOS  ] Last time is 1612349193 (Wed Feb  3 11:46:33 2021)
-04523587663i[      ] restoring default signal behavior
-04523587663i[SIM   ] quit_sim called with exit code 1
+00020599910i[HD    ] disk ata1-0 not present, aborting
+00147912958i[TERM  ] ips = 147,913M
+00286702018i[TERM  ] ips = 138,789M
+00424383192i[TERM  ] ips = 137,681M
+00556266052i[TERM  ] ips = 131,883M
+00684458724i[TERM  ] ips = 128,193M
+00811945939i[TERM  ] ips = 127,487M
+00935186044i[TERM  ] ips = 123,240M
+01070729622i[TERM  ] ips = 135,544M
+01203505630i[TERM  ] ips = 132,776M
+01334088000i[TERM  ] ips = 130,582M
+01469694133i[TERM  ] ips = 135,606M
+01605358975i[TERM  ] ips = 135,665M
+01754692155i[TERM  ] ips = 149,333M
+01890471013i[TERM  ] ips = 135,779M
+02031628350i[TERM  ] ips = 141,157M
+02177322498i[TERM  ] ips = 145,694M
+02321030698i[TERM  ] ips = 143,708M
+02464445295i[TERM  ] ips = 143,415M
+02614893861i[TERM  ] ips = 150,449M
+02761881177i[TERM  ] ips = 146,987M
+02903574810i[TERM  ] ips = 141,694M
+03045444362i[TERM  ] ips = 141,870M
+03122187707p[TERM  ] >>PANIC<< Received SIGHUP: quit simulation
+03122187707i[CPU0  ] CPU is in protected mode (active)
+03122187707i[CPU0  ] CS.mode = 32 bit
+03122187707i[CPU0  ] SS.mode = 32 bit
+03122187707i[CPU0  ] EFER   = 0x00000000
+03122187707i[CPU0  ] | EAX=00007ed7  EBX=001d0007  ECX=c90105b2  EDX=14f5fbc0
+03122187707i[CPU0  ] | ESP=c014763c  EBP=c0147654  ESI=0002bab0  EDI=00100ffc
+03122187707i[CPU0  ] | IOPL=0 id vip vif ac vm rf nt of df IF tf sf zf af PF cf
+03122187707i[CPU0  ] | SEG sltr(index|ti|rpl)     base    limit G D
+03122187707i[CPU0  ] |  CS:0008( 0001| 0|  0) 00000000 ffffffff 1 1
+03122187707i[CPU0  ] |  DS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
+03122187707i[CPU0  ] |  SS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
+03122187707i[CPU0  ] |  ES:0000( 0002| 0|  0) 00000000 ffffffff 1 1
+03122187707i[CPU0  ] |  FS:0000( 0002| 0|  0) 00000000 ffffffff 1 1
+03122187707i[CPU0  ] |  GS:0000( 0002| 0|  0) 00000000 ffffffff 1 1
+03122187707i[CPU0  ] | EIP=c0110da5 (c0110da5)
+03122187707i[CPU0  ] | CR0=0xe0000011 CR2=0x100008d8
+03122187707i[CPU0  ] | CR3=0x00104000 CR4=0x00000000
+03122187707i[CPU0  ] 0xc0110da5>> mov edx, dword ptr ds:0xc01455f0 : 8B15F05514C0
+03122187707i[CMOS  ] Last time is 1612368461 (Wed Feb  3 17:07:41 2021)
+03122187707i[      ] restoring default signal behavior
+03122187707i[SIM   ] quit_sim called with exit code 1

@@ -88,12 +88,12 @@ PUBLIC void yield(void)
 	struct process *p;	  /* Working process.     */
 	struct process *next; /* Next process to run. */
 
-	if (!IS_VALID(process_max))
+	if (process_max->state != PROC_READY)
 	{
 		process_max = FIRST_PROC;
 		for (p = FIRST_PROC; p < LAST_PROC; p++)
 		{
-			if (!IS_VALID(p))
+			if (p->state != PROC_READY) // MAYBE READY ???
 			{
 				continue;
 			}
@@ -104,7 +104,6 @@ PUBLIC void yield(void)
 			}
 		}
 	}
-
 
 	/* Re-schedule process for execution. */
 	if (curr_proc->state == PROC_RUNNING)
