@@ -83,6 +83,40 @@ PUBLIC void yield(void)
 	struct process *p;	  /* Working process.     */
 	struct process *next; /* Next process to run. */
 
+	queue[0] = NULL;
+	queue[1] = NULL;
+	queue[2] = NULL;
+	queue[3] = NULL;
+
+	IDLE->nice = 40;
+
+	for (p = FIRST_PROC; p <= LAST_PROC; p++)
+	{
+		if (IS_VALID(p))
+		{
+			if ((p->alarm) && (p->alarm < ticks))
+				p->alarm = 0, sndsig(p, SIGALRM);
+
+			for (int i = 0; i < 4; i++)
+				if (p->nice <= 10 * (i + 1 + p->nbsched))
+				{
+					// Ajout d'un process dans une queue vide
+					if (queue[i] == NULL)
+					{
+						queue[i] = p;
+						queue[i]->queue_next = NULL;
+					}
+					// Ajout d'un process dans une queue en deuxième position
+					else
+					{
+						p->queue_next = queue[i]->queue_next;
+						queue[i]->queue_next = p;
+					}
+					break;
+				}
+		}
+	}
+
 	/* Re-schedule process for execution. */
 	if (curr_proc->state == PROC_RUNNING)
 	{
@@ -90,41 +124,8 @@ PUBLIC void yield(void)
 		sched(curr_proc);
 	}
 
-	for (p = FIRST_PROC; p <= LAST_PROC; p++)
-	{
-		for (int i = 0; i < 4; i++)
-			if (p->nice <= 10 * (i + 1 + p->nbsched))
-			{
-				// Ajout d'un process dans une queue vide
-				if (queue[i] == NULL)
-				{
-					queue[i] = p;
-					queue[i]->queue_next = NULL;
-				}
-				// Ajout d'un process dans une queue en deuxième position
-				else
-				{
-					p->queue_next = queue[i]->queue_next;
-					queue[i]->queue_next = p;
-				}
-				break;
-			}
-	}
-
 	/* Remember this process. */
 	last_proc = curr_proc;
-
-	/* Check alarm. */
-	for (p = FIRST_PROC; p <= LAST_PROC; p++)
-	{
-		/* Skip invalid processes. */
-		if (!IS_VALID(p))
-			continue;
-
-		/* Alarm has expired. */
-		if ((p->alarm) && (p->alarm < ticks))
-			p->alarm = 0, sndsig(p, SIGALRM);
-	}
 
 	/* Choose a process to run next. */
 	next = IDLE;
@@ -142,8 +143,8 @@ PUBLIC void yield(void)
 		p = queue[i];
 		while (p != NULL)
 		{
-			prio_p = P * p->priority + N * p->nice + C * p->counter;
-			prio_next = P * next->priority + N * next->nice + C * next->counter;
+			prio_p = P * p->priority + C * p->counter;
+			prio_next = P * next->priority + C * next->counter;
 
 			if (prio_p < prio_next)
 			{
@@ -174,6 +175,7 @@ PUBLIC void yield(void)
 	next->priority = PRIO_USER;
 	next->state = PROC_RUNNING;
 	next->counter = PROC_QUANTUM;
+
 	if (curr_proc != next)
 		switch_to(next);
 }
