@@ -215,6 +215,7 @@
 	EXTERN int issig(void);
 	EXTERN void pm_init(void);
 	EXTERN void sched(struct process *);
+	EXTERN void init_queue(struct process *);
 
 #ifdef __NANVIX_KERNEL__
 
