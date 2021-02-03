@@ -23,35 +23,37 @@
 #include <nanvix/hal.h>
 #include <nanvix/pm.h>
 #include <signal.h>
+#include <nanvix/klib.h>
+#define SELECT_CONST 100
+#define P -1
+#define N -1
 
-struct process *queue[4] = {NULL};
+struct process *process_max = NULL;
 
 /**
  * @brief Schedules a process to execution.
  * 
  * @param proc Process to be scheduled.
  */
-
-/*
 PUBLIC void sched(struct process *proc)
 {
 	proc->state = PROC_READY;
 	proc->counter = 0;
-}
-*/
-PUBLIC void sched(struct process *proc)
-{
-	proc->state = PROC_READY;
-	proc->counter = 0;
-	int i;
-	for (i = 0; i < 4; i++)
-		if (proc->nice <= 10 * (i + 1))
-			break;
+	int nb_tickets = SELECT_CONST + P * proc->priority + N * proc->nice;
 
-	if (10 * (i + proc->nbsched) > 40)
-		proc->nbsched = 0;
+	if (process_max == NULL)
+	{
+		process_max = proc;
+	}
+	else
+	{
+		if (process_max->lottery_tickets < nb_tickets)
+		{
+			process_max = proc;
+		}
+	}
 
-	init_queue(proc);
+	proc->lottery_tickets = nb_tickets;
 }
 
 /**
@@ -78,30 +80,6 @@ PUBLIC void resume(struct process *proc)
 		sched(proc);
 }
 
-PUBLIC void init_queue(struct process *p)
-{
-	if (p->state == PROC_READY)
-	{
-		for (int i = 0; i < 4; i++)
-			if (p->nice <= 10 * (i + 1 + p->nbsched))
-			{
-				// Ajout d'un process dans une queue vide
-				if (queue[i] == NULL)
-				{
-					queue[i] = p;
-					queue[i]->queue_next = NULL;
-				}
-				// Ajout d'un process dans une queue en deuxième position
-				else
-				{
-					p->queue_next = queue[i]->queue_next;
-					queue[i]->queue_next = p;
-				}
-				break;
-			}
-	}
-}
-
 /**
  * @brief Yields the processor.
  */
@@ -110,82 +88,85 @@ PUBLIC void yield(void)
 	struct process *p;	  /* Working process.     */
 	struct process *next; /* Next process to run. */
 
+	if (!IS_VALID(process_max))
+	{
+		process_max = FIRST_PROC;
+		for (p = FIRST_PROC; p < LAST_PROC; p++)
+		{
+			if (!IS_VALID(p))
+			{
+				continue;
+			}
+
+			if (p->lottery_tickets > process_max->lottery_tickets)
+			{
+				process_max = p;
+			}
+		}
+	}
+
+
 	/* Re-schedule process for execution. */
 	if (curr_proc->state == PROC_RUNNING)
 	{
-		curr_proc->nbsched++;
 		sched(curr_proc);
 	}
-
-	/* Remember this process. */
-	last_proc = curr_proc;
 
 	/* Check alarm */
 	for (p = FIRST_PROC; p != LAST_PROC; p++)
 	{
 		if (!IS_VALID(p))
+		{
 			continue;
+		}
 
 		if ((p->alarm) && (p->alarm < ticks))
 			p->alarm = 0, sndsig(p, SIGALRM);
 	}
 
-	/* Choose a process to run next. */
 	next = IDLE;
 	next->counter = 0;
-
-	struct process *previous = NULL;
-	struct process *previousnext = NULL;
-
-#define P 1
-#define C -1
-
-	int i = 0;
-	for (; i < 4; i++)
+	int ticket_choice = krand()%process_max->lottery_tickets; //RANDOM
+	for (p = FIRST_PROC; p != LAST_PROC; p++)
 	{
-		int prio_p;
-		int prio_next;
-
-		p = queue[i];
-		while (p != NULL)
+		if (p->state != PROC_READY)
 		{
-			prio_p = P * p->priority + C * p->counter;
-			prio_next = P * next->priority + C * next->counter;
+			continue;
+		}
 
-			if (prio_p < prio_next)
+		if (p->lottery_tickets >= ticket_choice)
+		{
+			if (next->lottery_tickets < p->lottery_tickets)
 			{
 				next->counter++;
 				next = p;
-				previousnext = previous;
-			}
-			else if (prio_p == prio_next)
-			{
-				if (p->nice <= next->nice)
-				{
-					next->counter++;
-					next = p;
-					previousnext = previous;
-				}
-				else
-					p->counter++;
 			}
 			else
-				p->counter++;
-
-			previous = p;
-			p = p->queue_next;
+			{
+				if (next->lottery_tickets == p->lottery_tickets)
+				{
+					if (next->counter <= p->counter)
+					{
+						next->counter++;
+						next = p;
+					}
+					else
+					{
+						p->counter++;
+					}
+				}
+				else
+				{
+					p->counter++;
+				}
+			}
 		}
-
-		if (next != IDLE)
-			break;
+		else
+		{
+			p->counter++;
+		}
 	}
 
-	if (previousnext != NULL)
-		previousnext = next->queue_next;
-	else{
-		queue[i]=next->queue_next;
-	}
-	
 	/* Switch to next process. */
 	next->priority = PRIO_USER;
 	next->state = PROC_RUNNING;
