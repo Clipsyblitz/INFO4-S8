@@ -43,15 +43,20 @@ PUBLIC void sched(struct process *proc)
 {
 	proc->state = PROC_READY;
 	proc->counter = 0;
-	int i;
-	for (i = 0; i < 4; i++)
-		if (proc->nice <= 10 * (i + 1))
-			break;
+	if (proc != IDLE)
+	{
+		for (int i = 0; i < 4; i++)
+			if (proc->nice <= 10 * (i + 1))
+			{
+				proc->initial_queue = i;
+				break;
+			}
 
-	if (10 * (i + proc->nbsched) > 40)
-		proc->nbsched = 0;
+		if (proc->current_queue > 3)
+			proc->current_queue = proc->initial_queue;
 
-	init_queue(proc);
+		add_in_queue(proc);
+	}
 }
 
 /**
@@ -80,26 +85,32 @@ PUBLIC void resume(struct process *proc)
 
 PUBLIC void init_queue(struct process *p)
 {
-	if (p->state == PROC_READY)
+	for (int i = 0; i < 4; i++)
+		if (p->nice <= 10 * (i + 1))
+		{
+			p->initial_queue = i;
+			break;
+		}
+	p->current_queue = p->initial_queue;
+}
+
+PUBLIC void delete_queue(struct process *p)
+{
+	struct process *previous = queue[p->current_queue];
+	if (previous == p)
+		queue[p->current_queue] = NULL;
+	else
 	{
-		for (int i = 0; i < 4; i++)
-			if (p->nice <= 10 * (i + 1 + p->nbsched))
-			{
-				// Ajout d'un process dans une queue vide
-				if (queue[i] == NULL)
-				{
-					queue[i] = p;
-					queue[i]->queue_next = NULL;
-				}
-				// Ajout d'un process dans une queue en deuxième position
-				else
-				{
-					p->queue_next = queue[i]->queue_next;
-					queue[i]->queue_next = p;
-				}
-				break;
-			}
+		for (; previous->queue_next != p; previous = previous->queue_next)
+			;
+		previous->queue_next = p->queue_next;
 	}
+}
+
+PUBLIC void add_in_queue(struct process *p)
+{
+	p->queue_next = queue[p->current_queue];
+	queue[p->current_queue] = p;
 }
 
 /**
@@ -113,7 +124,10 @@ PUBLIC void yield(void)
 	/* Re-schedule process for execution. */
 	if (curr_proc->state == PROC_RUNNING)
 	{
-		curr_proc->nbsched++;
+		if (curr_proc != IDLE)
+		{
+			curr_proc->current_queue++;
+		}
 		sched(curr_proc);
 	}
 
@@ -134,17 +148,14 @@ PUBLIC void yield(void)
 	next = IDLE;
 	next->counter = 0;
 
-	struct process *previous = NULL;
-	struct process *previousnext = NULL;
-
 #define P 1
 #define C -1
-
 	int i = 0;
+	int prio_p;
+	int prio_next;
+
 	for (; i < 4; i++)
 	{
-		int prio_p;
-		int prio_next;
 
 		p = queue[i];
 		while (p != NULL)
@@ -156,7 +167,6 @@ PUBLIC void yield(void)
 			{
 				next->counter++;
 				next = p;
-				previousnext = previous;
 			}
 			else if (prio_p == prio_next)
 			{
@@ -164,7 +174,6 @@ PUBLIC void yield(void)
 				{
 					next->counter++;
 					next = p;
-					previousnext = previous;
 				}
 				else
 					p->counter++;
@@ -172,7 +181,6 @@ PUBLIC void yield(void)
 			else
 				p->counter++;
 
-			previous = p;
 			p = p->queue_next;
 		}
 
@@ -180,12 +188,9 @@ PUBLIC void yield(void)
 			break;
 	}
 
-	if (previousnext != NULL)
-		previousnext = next->queue_next;
-	else{
-		queue[i]=next->queue_next;
-	}
-	
+	if (next != IDLE)
+		delete_queue(next);
+
 	/* Switch to next process. */
 	next->priority = PRIO_USER;
 	next->state = PROC_RUNNING;

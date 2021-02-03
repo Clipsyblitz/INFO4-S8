@@ -31,10 +31,10 @@
  */
 PUBLIC pid_t sys_fork(void)
 {
-	int i;                /* Loop index.     */
-	int err;              /* Error?          */
+	int i;				  /* Loop index.     */
+	int err;			  /* Error?          */
 	struct process *proc; /* Process.        */
-	struct region *reg;   /* Memory region.  */
+	struct region *reg;	  /* Memory region.  */
 	struct pregion *preg; /* Process region. */
 
 #if (EDUCATIONAL_KERNEL == 0)
@@ -58,43 +58,43 @@ PUBLIC pid_t sys_fork(void)
 	}
 
 	kprintf("process table overflow");
-	
+
 	return (-EAGAIN);
 
 found:
-	
+
 	/* Mark process as beeing created. */
 	proc->flags = 1 << PROC_NEW;
 
 	err = crtpgdir(proc);
-	
+
 	/* Failed to create process page directory. */
 	if (err)
 		goto error0;
-	
+
 	/*
 	 * Duplicate attached regions.
 	 * Notice that regions will be attached in the child process
 	 * on the same indexes as in the father process.
 	 */
 	for (i = 0; i < NR_PREGIONS; i++)
-	{	
+	{
 		preg = &curr_proc->pregs[i];
-		
+
 		/* Process region not in use. */
 		if (preg->reg == NULL)
-			continue;	
-			
+			continue;
+
 		lockreg(preg->reg);
 		reg = dupreg(preg->reg);
 		unlockreg(preg->reg);
-		
+
 		/* Failed to duplicate region. */
 		if (reg == NULL)
 			goto error1;
-		
+
 		err = attachreg(proc, &proc->pregs[i], preg->start, reg);
-		
+
 		/* Failed to attach region. */
 		if (err)
 		{
@@ -105,10 +105,10 @@ found:
 			freereg(reg);
 			goto error1;
 		}
-			
+
 		unlockreg(reg);
 	}
-	
+
 	/* Initialize process. */
 	proc->intlvl = 1;
 	proc->received = 0;
@@ -125,7 +125,7 @@ found:
 	for (i = 0; i < OPEN_MAX; i++)
 	{
 		proc->ofiles[i] = curr_proc->ofiles[i];
-		
+
 		/* Increment file reference count. */
 		if (proc->ofiles[i] != NULL)
 			proc->ofiles[i]->count++;
@@ -154,10 +154,11 @@ found:
 	proc->alarm = 0;
 	proc->next = NULL;
 	proc->chain = NULL;
+	init_queue(proc);
 	sched(proc);
 
 	curr_proc->nchildren++;
-	
+
 	nprocs++;
 
 	return (proc->pid);
@@ -169,7 +170,7 @@ error1:
 		/* Region not attached. */
 		if (proc->pregs[i].reg == NULL)
 			continue;
-		
+
 		/* Detach. */
 		preg = &proc->pregs[i];
 		lockreg(preg->reg);

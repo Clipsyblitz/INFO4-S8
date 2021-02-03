@@ -204,8 +204,9 @@
     	unsigned alarm;          /**< Alarm.                  */
 		struct process *next;    /**< Next process in a list. */
 		struct process **chain;  /**< Sleeping chain.         */
-		int nbsched; 			 /**< Accumulates the number of calls of the func sched */
-		struct process *queue_next;	
+		struct process *queue_next;
+		int current_queue;
+		int initial_queue;	
 		/**@}*/
 	};
 	
@@ -215,6 +216,8 @@
 	EXTERN int issig(void);
 	EXTERN void pm_init(void);
 	EXTERN void sched(struct process *);
+	EXTERN void add_in_queue(struct process *);
+	EXTERN void delete_queue(struct process *);
 	EXTERN void init_queue(struct process *);
 
 #ifdef __NANVIX_KERNEL__
