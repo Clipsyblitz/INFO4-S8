@@ -71,9 +71,6 @@ PUBLIC void yield(void)
 	if (curr_proc->state == PROC_RUNNING)
 		sched(curr_proc);
 
-	/* Remember this process. */
-	last_proc = curr_proc;
-
 	/* Check alarm. */
 	for (p = FIRST_PROC; p <= LAST_PROC; p++)
 	{
@@ -96,23 +93,24 @@ PUBLIC void yield(void)
 		if (p->state != PROC_READY)
 			continue;
 
-			/*
-		 * Process with higher
-		 * waiting time found.
-		 */
-
 #define N 1
 #define P 1
 #define C -1
 
+		/* Stock a linear combination of the different priorities in order to get a unique priority
+		 * for the current process p and the actual next process next
+		*/
 		int prio_p = P * p->priority + N * p->nice + C * p->counter;
 		int prio_next = P * next->priority + N * next->nice + C * next->counter;
 
+		/* The lower priority is in fact the higher one */
 		if (prio_p < prio_next)
 		{
 			next->counter++;
 			next = p;
 		}
+
+		/* Choose the next process when the priority is perfectly equal, based on the nice priority */
 		else if (prio_p == prio_next)
 		{
 			if (p->nice <= next->nice)
