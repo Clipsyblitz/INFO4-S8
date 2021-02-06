@@ -24,10 +24,13 @@
 #include <nanvix/pm.h>
 #include <signal.h>
 #include <nanvix/klib.h>
+
+/* Define constants for the lotery algorithm */
 #define SELECT_CONST 100
 #define P -1
 #define N -1
 
+/* Initialisation of a variable that remember the process with max tickets */
 struct process *process_max = NULL;
 
 /**
@@ -39,8 +42,11 @@ PUBLIC void sched(struct process *proc)
 {
 	proc->state = PROC_READY;
 	proc->counter = 0;
+
+	/* Determinate the right number of tickets based on the priorities */
 	int nb_tickets = SELECT_CONST + P * proc->priority + N * proc->nice;
 
+	/* Check the process_max and change it if necessary */
 	if (process_max == NULL)
 	{
 		process_max = proc;
@@ -88,6 +94,7 @@ PUBLIC void yield(void)
 	struct process *p;	  /* Working process.     */
 	struct process *next; /* Next process to run. */
 
+	/* Check if the process_max is valid and ready, if not change it */
 	if (process_max->state != PROC_READY)
 	{
 		process_max = FIRST_PROC;
@@ -125,7 +132,11 @@ PUBLIC void yield(void)
 
 	next = IDLE;
 	next->counter = 0;
-	int ticket_choice = krand()%process_max->lottery_tickets; //RANDOM
+
+	/* Take a random number between 0 and the maximum number of tickets that a process could currently have */
+	int ticket_choice = krand() % process_max->lottery_tickets;
+
+	/* Take the next process that its tickets amount is higher than the random number */
 	for (p = FIRST_PROC; p != LAST_PROC; p++)
 	{
 		if (p->state != PROC_READY)
@@ -133,6 +144,7 @@ PUBLIC void yield(void)
 			continue;
 		}
 
+		/* Determinate the next process in order to take the more prioritary one to avoid famine */
 		if (p->lottery_tickets >= ticket_choice)
 		{
 			if (next->lottery_tickets < p->lottery_tickets)
@@ -140,24 +152,21 @@ PUBLIC void yield(void)
 				next->counter++;
 				next = p;
 			}
-			else
+			else if (next->lottery_tickets == p->lottery_tickets)
 			{
-				if (next->lottery_tickets == p->lottery_tickets)
+				if (next->counter <= p->counter)
 				{
-					if (next->counter <= p->counter)
-					{
-						next->counter++;
-						next = p;
-					}
-					else
-					{
-						p->counter++;
-					}
+					next->counter++;
+					next = p;
 				}
 				else
 				{
 					p->counter++;
 				}
+			}
+			else
+			{
+				p->counter++;
 			}
 		}
 		else
