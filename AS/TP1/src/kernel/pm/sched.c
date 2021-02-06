@@ -24,38 +24,30 @@
 #include <nanvix/pm.h>
 #include <signal.h>
 
-struct process *queue[4] = {NULL};
+struct process *queue[4] = {NULL}; /* 4 different queue based on linked list */
 
 /**
  * @brief Schedules a process to execution.
  * 
  * @param proc Process to be scheduled.
  */
-
-/*
-PUBLIC void sched(struct process *proc)
-{
-	proc->state = PROC_READY;
-	proc->counter = 0;
-}
-*/
 PUBLIC void sched(struct process *proc)
 {
 	proc->state = PROC_READY;
 	proc->counter = 0;
 	if (proc != IDLE)
 	{
-		for (int i = 0; i < 4; i++)
+		for (int i = 0; i < 4; i++)  /* Recalculate the field initial_queue if the field nice is edit somwhere */
 			if (proc->nice <= 10 * (i + 1))
 			{
 				proc->initial_queue = i;
 				break;
 			}
 
-		if (proc->current_queue > 3)
-			proc->current_queue = proc->initial_queue;
+		if (proc->current_queue > 3)	/* If we try to reach a lower priority queue than the lower one */
+			proc->current_queue = proc->initial_queue;	/* Edit the fieldcurrent_queue to the initial queue */
 
-		add_in_queue(proc);
+		add_in_queue(proc);	/* Add the processus in the right queue */
 	}
 }
 
@@ -83,6 +75,12 @@ PUBLIC void resume(struct process *proc)
 		sched(proc);
 }
 
+/**
+ * @brief Init the process' initial queue thanks to the field nice
+ * 
+ * @param proc Process to be initialized
+ *  
+ */
 PUBLIC void init_queue(struct process *p)
 {
 	for (int i = 0; i < 4; i++)
@@ -94,19 +92,32 @@ PUBLIC void init_queue(struct process *p)
 	p->current_queue = p->initial_queue;
 }
 
+
+/**
+ * @brief Delete a process from his current queue 
+ * 
+ * @param proc Process to be deleted
+ * 
+ */
 PUBLIC void delete_queue(struct process *p)
 {
-	struct process *previous = queue[p->current_queue];
-	if (previous == p)
-		queue[p->current_queue] = queue[p->current_queue]->queue_next;
+	struct process *previous = queue[p->current_queue]; /* Head of the queue */
+	if (previous == p) /* If we try to delete the head of the queue */
+		queue[p->current_queue] = queue[p->current_queue]->queue_next; /* Replace the head by the second elements*/
 	else
 	{
-		for (; previous->queue_next != p; previous = previous->queue_next);
+		for (; previous->queue_next != p; previous = previous->queue_next); /* Find the process to delete in the queue */
 		
-		previous->queue_next = p->queue_next;
+		previous->queue_next = p->queue_next; /* Chain the previous of the process to delete with the next one*/
 	}
 }
 
+/**
+ * @brief Add a process at the head of his current queue 
+ * 
+ * @param proc Process to be added
+ * 
+ */
 PUBLIC void add_in_queue(struct process *p)
 {
 	p->queue_next = queue[p->current_queue];
@@ -126,7 +137,7 @@ PUBLIC void yield(void)
 	{
 		if (curr_proc != IDLE)
 		{
-			curr_proc->current_queue++;
+			curr_proc->current_queue++;	/* downgrade the process */
 		}
 		sched(curr_proc);
 	}
@@ -151,10 +162,11 @@ PUBLIC void yield(void)
 	int prio_p;
 	int prio_next;
 
+	/* Find the next process to run */
 	for (; i < 4; i++)
 	{
 
-		p = queue[i];
+		p = queue[i]; 
 		while (p != NULL)
 		{
 			prio_p = P * p->priority + C * p->counter;
@@ -181,11 +193,11 @@ PUBLIC void yield(void)
 			p = p->queue_next;
 		}
 
-		if (next != IDLE)
+		if (next != IDLE)	/* if we find a next (different from IDLE) in a queue, we can stop for searching the processus with the highest priority */
 			break;
 	}
 
-	if (next != IDLE)
+	if (next != IDLE)	/* remove the process to run from his queue */
 		delete_queue(next);
 
 	/* Switch to next process. */
