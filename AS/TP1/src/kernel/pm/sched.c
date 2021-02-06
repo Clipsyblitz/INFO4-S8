@@ -98,11 +98,11 @@ PUBLIC void delete_queue(struct process *p)
 {
 	struct process *previous = queue[p->current_queue];
 	if (previous == p)
-		queue[p->current_queue] = NULL;
+		queue[p->current_queue] = queue[p->current_queue]->queue_next;
 	else
 	{
-		for (; previous->queue_next != p; previous = previous->queue_next)
-			;
+		for (; previous->queue_next != p; previous = previous->queue_next);
+		
 		previous->queue_next = p->queue_next;
 	}
 }
@@ -130,9 +130,6 @@ PUBLIC void yield(void)
 		}
 		sched(curr_proc);
 	}
-
-	/* Remember this process. */
-	last_proc = curr_proc;
 
 	/* Check alarm */
 	for (p = FIRST_PROC; p != LAST_PROC; p++)
