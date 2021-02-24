@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "sem.h": "c",
+        "syscall.h": "c",
+        "pm.h": "c"
+    }
+}

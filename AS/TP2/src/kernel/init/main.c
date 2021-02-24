@@ -25,6 +25,7 @@
 #include <nanvix/dev.h>
 #include <nanvix/pm.h>
 #include <nanvix/mm.h>
+#include <nanvix/sem.h>
 #include <nanvix/syscall.h>
 #include <fcntl.h>
 
@@ -122,6 +123,7 @@ PUBLIC void kmain(void)
 	mm_init();
 	pm_init();
 	fs_init();
+	sem_init();
 	
 	chkout(DEVID(TTY_MAJOR, 0, CHRDEV));
 	kprintf(KERN_INFO "kout is now initialized");

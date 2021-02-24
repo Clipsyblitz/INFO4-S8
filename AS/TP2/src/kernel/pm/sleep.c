@@ -41,7 +41,7 @@ PRIVATE struct process **idle_chain = NULL;
  * @param priority Priority that the process shall assume after waking up.
  */
 PUBLIC void sleep(struct process **chain, int priority)
-{	
+{
 	/*
 	 * Idle process trying to sleep. Although that may
 	 * sound weird, it happens at system startup. So,
@@ -64,16 +64,16 @@ PUBLIC void sleep(struct process **chain, int priority)
 	 */
 	if ((priority >= 0) && (curr_proc->received))
 		return;
-		
+
 	/* Insert process in the sleeping chain. */
 	curr_proc->next = *chain;
 	*chain = curr_proc;
-	
+
 	/* Put process to sleep. */
 	curr_proc->state = (priority >= 0) ? PROC_WAITING : PROC_SLEEPING;
 	curr_proc->priority = priority;
 	curr_proc->chain = chain;
-	
+
 	yield();
 }
 
@@ -83,7 +83,7 @@ PUBLIC void sleep(struct process **chain, int priority)
  * @param chain Chain of sleeping processes to be awaken.
  */
 PUBLIC void wakeup(struct process **chain)
-{	
+{
 	/*
 	 * Wakeup idle process. Note that here we don't
 	 * schedule the idle process for execution, once
@@ -95,10 +95,24 @@ PUBLIC void wakeup(struct process **chain)
 		idle_chain = NULL;
 		return;
 	}
-	
+
 	/* Wakeup sleeping processes. */
 	while (*chain != NULL)
 	{
+		sched(*chain);
+		*chain = (*chain)->next;
+	}
+}
+
+PUBLIC void wakeup_one(struct process **chain)
+{
+	if (idle_chain == chain)
+	{
+		idle_chain = NULL;
+		return;
+	}
+
+	if (*chain != NULL) {
 		sched(*chain);
 		*chain = (*chain)->next;
 	}

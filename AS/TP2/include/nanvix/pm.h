@@ -205,6 +205,13 @@
 		struct process *next;    /**< Next process in a list. */
 		struct process **chain;  /**< Sleeping chain.         */
 		/**@}*/
+		
+		/**
+    	 * @name Semaphore information
+    	 */
+		/**@{*/
+		struct process *wlistnext;
+		/**@}*/
 	};
 	
 	/* Forward definitions. */
@@ -222,6 +229,7 @@
 
     EXTERN void sndsig(struct process *, int);
 	EXTERN void wakeup(struct process **);
+	EXTERN void wakeup_one(struct process **);
 	EXTERN void yield(void);
 	
 	/**
