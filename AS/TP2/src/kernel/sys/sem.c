@@ -2,9 +2,8 @@
 
 void sem_init()
 {
-    struct semtab *sem; /* Working process. */
-
-    /* Initialize the process table. */
+    struct semtab *sem; 
+    
     for (sem = &semtab[0]; sem <= &semtab[PROC_MAX]; sem++)
         sem->state = SEM_DEAD;
 }
