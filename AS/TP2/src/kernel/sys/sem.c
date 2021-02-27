@@ -45,7 +45,7 @@ int up(int id)
         enable_interrupts();
         wakeup_one(&p);
         disable_interrupts();
-        cs->wait_list = cs->wait_list->p;
+        cs->wait_list = p;
         enable_interrupts();
         return 0;
     }
