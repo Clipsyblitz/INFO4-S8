@@ -496,14 +496,8 @@ int semaphore_test3(void)
 	return (0);
 }
 
-//reader writer
-int semaphore_test4(void)
-{
-	return 1;
-}
-
 // prodcons with multiple producers and consumers (1 and 4 but editable)
-int semaphore_test5(void)
+int semaphore_test4(void)
 {
 	pid_t pid[5];                  /* Process ID.              */
 	int buffer_fd;              /* Buffer file descriptor.  */
@@ -742,7 +736,7 @@ int main(int argc, char **argv)
 		{
 			printf("Interprocess Communication Tests\n");
 			printf("  producer consumer [%s]\n",
-				(!semaphore_test3() && !semaphore_test5()) ? "PASSED" : "FAILED");
+				(!semaphore_test3() && !semaphore_test4()) ? "PASSED" : "FAILED");
 		}
 
 		/* FPU test. */
