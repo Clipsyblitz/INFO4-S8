@@ -1,6 +1,6 @@
 00000000000i[      ] Bochs x86 Emulator 2.6.9
 00000000000i[      ]   Built from SVN snapshot on April 9, 2017
-00000000000i[      ] Compiled on Jan 13 2021 at 10:24:21
+00000000000i[      ] Compiled on Jan 13 2021 at 10:30:52
 00000000000i[      ] System configuration
 00000000000i[      ]   processors: 1 (cores=1, HT threads=1)
 00000000000i[      ]   A20 line support: yes
@@ -31,7 +31,7 @@
 00000000000i[      ]   Sound support: no
 00000000000i[      ]   USB support: no
 00000000000i[      ]   VGA extension support: vbe
-00000000000i[MEM0  ] allocated memory at 0x7f278a178010. after alignment, vector=0x7f278a179000
+00000000000i[MEM0  ] allocated memory at 0x7f6467bd2010. after alignment, vector=0x7f6467bd3000
 00000000000i[MEM0  ] 16,00MB
 00000000000i[MEM0  ] mem block size = 0x00020000, blocks=128
 00000000000i[MEM0  ] rom at 0xfffe0000/131072 ('/usr/local/share/bochs/BIOS-bochs-latest')
@@ -41,7 +41,7 @@
 00000000000i[DEV   ] PIIX3 PCI-to-ISA bridge present at device 1, function 0
 00000000000i[PLUGIN] init_dev of 'cmos' plugin device by virtual method
 00000000000i[CMOS  ] Using utc time for initial clock
-00000000000i[CMOS  ] Setting initial clock to: Wed Jan 13 09:46:31 2021 (time0=1610527591)
+00000000000i[CMOS  ] Setting initial clock to: Wed Mar 10 11:56:16 2021 (time0=1615373776)
 00000000000i[PLUGIN] init_dev of 'dma' plugin device by virtual method
 00000000000i[DMA   ] channel 4 used by cascade
 00000000000i[PLUGIN] init_dev of 'pic' plugin device by virtual method
@@ -80,7 +80,7 @@
 00000000000i[PLUGIN] init_dev of 'unmapped' plugin device by virtual method
 00000000000i[PLUGIN] init_dev of 'biosdev' plugin device by virtual method
 00000000000i[PLUGIN] init_dev of 'speaker' plugin device by virtual method
-00000000000e[PCSPK ] Failed to open /dev/console: Permission denied
+00000000000e[PCSPK ] Failed to open /dev/console: Permission non accordée
 00000000000e[PCSPK ] Deactivating beep on console
 00000000000i[PLUGIN] init_dev of 'extfpuirq' plugin device by virtual method
 00000000000i[PLUGIN] init_dev of 'parallel' plugin device by virtual method
@@ -143,11 +143,6 @@
 00000000000i[PLUGIN] reset of 'extfpuirq' plugin device by virtual method
 00000000000i[PLUGIN] reset of 'parallel' plugin device by virtual method
 00000000000i[PLUGIN] reset of 'serial' plugin device by virtual method
-00000000000i[GDBST ] addr 000000000000fff0 len 1
-00000000000i[GDBST ] addr 000000000000fff0 len 1
-00000000000i[GDBST ] addr 000000000000ffc0 len 40
-00000000000i[GDBST ] addr 000000000000fff0 len 8
-00000000000i[GDBST ] addr 000000000000fff0 len 7
 00000004662i[BIOS  ] $Revision: 13073 $ $Date: 2017-02-16 22:43:52 +0100 (Do, 16. Feb 2017) $
 00000318050i[KBD   ] reset-disable command received
 00000320819i[BIOS  ] Starting rombios32
@@ -192,220 +187,140 @@
 00014530800i[BIOS  ] int13_harddisk: function 41, unmapped device for ELDL=81
 00014534477i[BIOS  ] int13_harddisk: function 08, unmapped device for ELDL=81
 00014538138i[BIOS  ] *** int 15h function AX=00c0, BX=0000 not yet supported!
-00020597455i[HD    ] disk ata1-0 not present, aborting
-00021609323i[GDBST ] stopped with ac0
-00021677760i[GDBST ] stopped with ac0
-00021930173i[GDBST ] stopped with ac0
-00023263952i[GDBST ] stopped with ac0
-00023270702i[GDBST ] stopped with ac0
-00023406021i[GDBST ] stopped with ac0
-00023406332i[GDBST ] stopped with ac0
-00024749238i[GDBST ] stopped with ac0
-00024817675i[GDBST ] stopped with ac0
-00025070071i[GDBST ] stopped with ac0
-00025372440i[GDBST ] stopped with ac0
-00027524217i[GDBST ] stopped with ac0
-00027592654i[GDBST ] stopped with ac0
-00027962122i[GDBST ] stopped with ac0
-00028325071i[GDBST ] stopped with ac0
-00029000561i[GDBST ] stopped with ac0
-00029262809i[GDBST ] stopped with ac0
-00029345608i[GDBST ] stopped with ac0
-00029431055i[GDBST ] stopped with ac0
-00029516550i[GDBST ] stopped with ac0
-00058024859i[TERM  ] ips = 58,025M
-00134404292i[TERM  ] ips = 76,379M
-00213191650i[TERM  ] ips = 78,787M
-00290710996i[TERM  ] ips = 77,519M
-00367451470i[TERM  ] ips = 76,740M
-00381661970i[GDBST ] Got byte 3
-00381661970i[GDBST ] stopped with ac3
-00381661970i[GDBST ] addr 00000000c0110c90 len 1
-00381661970i[GDBST ] addr 00000000c0110c90 len 1
-00381661970i[GDBST ] addr 00000000c0110c80 len 40
-00381661970i[GDBST ] addr 00000000c0110c90 len 8
-00381661970i[GDBST ] addr 00000000c0110c90 len 7
-00381661970i[TERM  ] ips = 14,210M
-00381661970i[GDBST ] addr 00000000c0110c90 len 1
-00381661970i[GDBST ] addr 00000000c0110c90 len 1
-00381661970i[GDBST ] addr 00000000c0110c90 len 8
-00381661970i[GDBST ] addr 00000000c0110c90 len 7
-00381661970i[GDBST ] addr 0000000000800300 len 40
-00382434211i[GDBST ] stopped with ac0
-00382443854i[GDBST ] stopped with ac0
-00382456629i[GDBST ] stopped with ac0
-00382463728i[GDBST ] stopped with ac0
-00383319955i[GDBST ] stopped with ac0
-00383388392i[GDBST ] stopped with ac0
-00383640941i[GDBST ] stopped with ac0
-00383965992i[GDBST ] stopped with ac0
-00384335969i[GDBST ] stopped with ac0
-00384900402i[GDBST ] stopped with ac0
-00402961676i[TERM  ] ips = 21,300M
-00479602151i[TERM  ] ips = 76,640M
-00558400060i[TERM  ] ips = 78,798M
-00637631214i[TERM  ] ips = 79,231M
-00717007470i[TERM  ] ips = 79,376M
-00796333470i[TERM  ] ips = 79,326M
-00875885588i[TERM  ] ips = 79,552M
-00955488848i[TERM  ] ips = 79,603M
-01035007470i[TERM  ] ips = 79,519M
-01114359470i[TERM  ] ips = 79,352M
-01193538405i[TERM  ] ips = 79,179M
-01272684296i[TERM  ] ips = 79,146M
-01352142470i[TERM  ] ips = 79,458M
-01431346970i[TERM  ] ips = 79,204M
-01510542878i[TERM  ] ips = 79,196M
-01514629396i[GDBST ] stopped with ac0
-01581705976i[GDBST ] stopped with ac0
-01581715352i[GDBST ] stopped with ac0
-01581728316i[GDBST ] stopped with ac0
-01581735226i[GDBST ] stopped with ac0
-01582552685i[GDBST ] stopped with ac0
-01582621326i[GDBST ] stopped with ac0
-01582873875i[GDBST ] stopped with ac0
-01583198926i[GDBST ] stopped with ac0
-01583569092i[GDBST ] stopped with ac0
-01584109102i[GDBST ] stopped with ac0
-01588961970i[TERM  ] ips = 78,419M
-01668293470i[TERM  ] ips = 79,332M
-01747730970i[TERM  ] ips = 79,438M
-01827248748i[TERM  ] ips = 79,518M
-01906775490i[TERM  ] ips = 79,527M
-01986267500i[TERM  ] ips = 79,492M
-02065477427i[TERM  ] ips = 79,210M
-02143840397i[TERM  ] ips = 78,363M
-02222764565i[TERM  ] ips = 78,924M
-02302017437i[TERM  ] ips = 79,253M
-02334634025i[GDBST ] stopped with ac0
-02381170266i[TERM  ] ips = 79,153M
-02460392051i[TERM  ] ips = 79,222M
-02539014929i[TERM  ] ips = 78,623M
-02618213096i[TERM  ] ips = 79,198M
-02646981992i[GDBST ] stopped with ac0
-02646991586i[GDBST ] stopped with ac0
-02647004361i[GDBST ] stopped with ac0
-02647011271i[GDBST ] stopped with ac0
-02647828919i[GDBST ] stopped with ac0
-02647897356i[GDBST ] stopped with ac0
-02648149905i[GDBST ] stopped with ac0
-02648474956i[GDBST ] stopped with ac0
-02648844933i[GDBST ] stopped with ac0
-02649446375i[GDBST ] stopped with ac0
-02696276266i[TERM  ] ips = 78,063M
-02775581622i[TERM  ] ips = 79,305M
-02854556766i[TERM  ] ips = 78,975M
-02933383527i[TERM  ] ips = 78,827M
-03012790288i[TERM  ] ips = 79,407M
-03092383495i[TERM  ] ips = 79,593M
-03171880653i[TERM  ] ips = 79,497M
-03251175215i[TERM  ] ips = 79,295M
-03330549951i[TERM  ] ips = 79,375M
-03409587402i[TERM  ] ips = 79,037M
-03488639399i[TERM  ] ips = 79,052M
-03567581675i[TERM  ] ips = 78,942M
-03646835766i[TERM  ] ips = 79,254M
-03699042430i[GDBST ] stopped with ac0
-03699808980i[GDBST ] stopped with ac0
-03699818356i[GDBST ] stopped with ac0
-03699831131i[GDBST ] stopped with ac0
-03699838230i[GDBST ] stopped with ac0
-03700696002i[GDBST ] stopped with ac0
-03700764643i[GDBST ] stopped with ac0
-03701017192i[GDBST ] stopped with ac0
-03701343372i[GDBST ] stopped with ac0
-03702243811i[GDBST ] stopped with ac0
-03724475930i[TERM  ] ips = 77,640M
-03803945186i[TERM  ] ips = 79,469M
-03883339595i[TERM  ] ips = 79,394M
-03962211000i[TERM  ] ips = 78,871M
-04041282923i[TERM  ] ips = 79,072M
-04041561749i[GDBST ] stopped with ac0
-04042328234i[GDBST ] stopped with ac0
-04042337828i[GDBST ] stopped with ac0
-04042350603i[GDBST ] stopped with ac0
-04042357513i[GDBST ] stopped with ac0
-04043215166i[GDBST ] stopped with ac0
-04043283603i[GDBST ] stopped with ac0
-04043536152i[GDBST ] stopped with ac0
-04043862134i[GDBST ] stopped with ac0
-04044759008i[GDBST ] stopped with ac0
-04119478266i[TERM  ] ips = 78,195M
-04198840236i[TERM  ] ips = 79,362M
-04277864266i[TERM  ] ips = 79,024M
-04357127200i[TERM  ] ips = 79,263M
-04436157426i[TERM  ] ips = 79,030M
-04515385271i[TERM  ] ips = 79,228M
-04561598125i[GDBST ] stopped with ac0
-04562364454i[GDBST ] stopped with ac0
-04562374019i[GDBST ] stopped with ac0
-04562386809i[GDBST ] stopped with ac0
-04562393719i[GDBST ] stopped with ac0
-04563275415i[GDBST ] stopped with ac0
-04593545821i[TERM  ] ips = 78,161M
-04673154766i[TERM  ] ips = 79,609M
-04752410422i[TERM  ] ips = 79,256M
-04831755766i[TERM  ] ips = 79,345M
-04870982338i[GDBST ] stopped with ac0
-04871748602i[GDBST ] stopped with ac0
-04871758196i[GDBST ] stopped with ac0
-04871770971i[GDBST ] stopped with ac0
-04871778070i[GDBST ] stopped with ac0
-04872634297i[GDBST ] stopped with ac0
-04872702734i[GDBST ] stopped with ac0
-04872955283i[GDBST ] stopped with ac0
-04873280334i[GDBST ] stopped with ac0
-04873650311i[GDBST ] stopped with ac0
-04874305714i[GDBST ] stopped with ac0
-04909402493i[TERM  ] ips = 77,647M
-04988471340i[TERM  ] ips = 79,069M
-05067411143i[TERM  ] ips = 78,940M
-05146332976i[TERM  ] ips = 78,922M
-05225402696i[TERM  ] ips = 79,070M
-05304647766i[TERM  ] ips = 79,245M
-05320266695i[GDBST ] stopped with ac0
-05321032959i[GDBST ] stopped with ac0
-05321042335i[GDBST ] stopped with ac0
-05321055110i[GDBST ] stopped with ac0
-05321062209i[GDBST ] stopped with ac0
-05321918436i[GDBST ] stopped with ac0
-05321987077i[GDBST ] stopped with ac0
-05322239626i[GDBST ] stopped with ac0
-05322564677i[GDBST ] stopped with ac0
-05322934654i[GDBST ] stopped with ac0
-05323590047i[GDBST ] stopped with ac0
-05382514266i[TERM  ] ips = 77,867M
-05461908835i[TERM  ] ips = 79,395M
-05541360508i[TERM  ] ips = 79,452M
-05620839806i[TERM  ] ips = 79,479M
-05700293074i[TERM  ] ips = 79,453M
-05779507967i[TERM  ] ips = 79,215M
-05858454569i[TERM  ] ips = 78,947M
-05937661053i[TERM  ] ips = 79,206M
-06016977766i[TERM  ] ips = 79,317M
-06096501176i[TERM  ] ips = 79,523M
-06176037806i[TERM  ] ips = 79,537M
-06255167766i[TERM  ] ips = 79,130M
-06306104000i[TERM  ] ips = 50,936M
-06306104000p[TERM  ] >>PANIC<< Received SIGHUP: quit simulation
-06306104000i[CPU0  ] CPU is in protected mode (active)
-06306104000i[CPU0  ] CS.mode = 32 bit
-06306104000i[CPU0  ] SS.mode = 32 bit
-06306104000i[CPU0  ] EFER   = 0x00000000
-06306104000i[CPU0  ] | EAX=c0147680  EBX=001d0007  ECX=c0147680  EDX=c011aff8
-06306104000i[CPU0  ] | ESP=c014763c  EBP=c0147654  ESI=0002bab0  EDI=00100ffc
-06306104000i[CPU0  ] | IOPL=0 id vip vif ac vm rf nt of df IF tf sf zf af pf cf
-06306104000i[CPU0  ] | SEG sltr(index|ti|rpl)     base    limit G D
-06306104000i[CPU0  ] |  CS:0008( 0001| 0|  0) 00000000 ffffffff 1 1
-06306104000i[CPU0  ] |  DS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
-06306104000i[CPU0  ] |  SS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
-06306104000i[CPU0  ] |  ES:0000( 0002| 0|  0) 00000000 ffffffff 1 1
-06306104000i[CPU0  ] |  FS:0000( 0002| 0|  0) 00000000 ffffffff 1 1
-06306104000i[CPU0  ] |  GS:0000( 0002| 0|  0) 00000000 ffffffff 1 1
-06306104000i[CPU0  ] | EIP=c0110d6a (c0110d6a)
-06306104000i[CPU0  ] | CR0=0xe0000011 CR2=0x100008d8
-06306104000i[CPU0  ] | CR3=0x00104000 CR4=0x00000000
-06306104000i[CPU0  ] 0xc0110d6a>> mov dword ptr ds:[eax+452], 0x00000002 : C780C401000002000000
-06306104000i[CMOS  ] Last time is 1610529167 (Wed Jan 13 10:12:47 2021)
-06306104000i[      ] restoring default signal behavior
-06306104000i[SIM   ] quit_sim called with exit code 1
+00020597703i[HD    ] disk ata1-0 not present, aborting
+00151673568i[TERM  ] ips = 151,674M
+00287297153i[TERM  ] ips = 135,624M
+00437273111i[TERM  ] ips = 149,976M
+00609310817i[TERM  ] ips = 172,038M
+00795876112i[TERM  ] ips = 186,565M
+00981458877i[TERM  ] ips = 185,583M
+01165336165i[TERM  ] ips = 183,877M
+01349736488i[TERM  ] ips = 184,400M
+01531335931i[TERM  ] ips = 181,599M
+01714864277i[TERM  ] ips = 183,528M
+01906490171i[TERM  ] ips = 191,626M
+02093742867i[TERM  ] ips = 187,253M
+02279266395i[TERM  ] ips = 185,524M
+02463718294i[TERM  ] ips = 184,452M
+02652067933i[TERM  ] ips = 188,350M
+02836200334i[TERM  ] ips = 184,132M
+03020701462i[TERM  ] ips = 184,501M
+03205666246i[TERM  ] ips = 184,965M
+03395049704i[TERM  ] ips = 189,383M
+03579400813i[TERM  ] ips = 184,351M
+03770275555i[TERM  ] ips = 190,875M
+03955948593i[TERM  ] ips = 185,673M
+04131962016i[TERM  ] ips = 176,013M
+04323565582i[TERM  ] ips = 191,604M
+04503980000i[TERM  ] ips = 180,414M
+04688568779i[TERM  ] ips = 184,589M
+04863962952i[TERM  ] ips = 175,394M
+05033189760i[TERM  ] ips = 169,227M
+05215905803i[TERM  ] ips = 182,716M
+05403399907i[TERM  ] ips = 187,494M
+05591943193i[TERM  ] ips = 188,543M
+05777905590i[TERM  ] ips = 185,962M
+05967814534i[TERM  ] ips = 189,909M
+06145723883i[TERM  ] ips = 177,909M
+06335457975i[TERM  ] ips = 189,734M
+06526286071i[TERM  ] ips = 190,828M
+06714997546i[TERM  ] ips = 188,711M
+06903620000i[TERM  ] ips = 188,622M
+07092064742i[TERM  ] ips = 188,445M
+07281379494i[TERM  ] ips = 189,315M
+07468853431i[TERM  ] ips = 187,474M
+07653123838i[TERM  ] ips = 184,270M
+07826851811i[TERM  ] ips = 173,728M
+08016731887i[TERM  ] ips = 189,880M
+08203520348i[TERM  ] ips = 186,788M
+08356111557i[TERM  ] ips = 152,591M
+08540603529i[TERM  ] ips = 184,492M
+08720822475i[TERM  ] ips = 180,219M
+08908440841i[TERM  ] ips = 187,618M
+09098306660i[TERM  ] ips = 189,866M
+09284787221i[TERM  ] ips = 186,481M
+09466920344i[TERM  ] ips = 182,133M
+09650934200i[TERM  ] ips = 184,014M
+09839500461i[TERM  ] ips = 188,566M
+10029873131i[TERM  ] ips = 190,373M
+10216929066i[TERM  ] ips = 187,056M
+10399117836i[TERM  ] ips = 182,189M
+10589603653i[TERM  ] ips = 190,486M
+10777051286i[TERM  ] ips = 187,448M
+10968043723i[TERM  ] ips = 190,992M
+11159429511i[TERM  ] ips = 191,386M
+11347990418i[TERM  ] ips = 188,561M
+11536432092i[TERM  ] ips = 188,442M
+11717490840i[TERM  ] ips = 181,059M
+11906399806i[TERM  ] ips = 188,909M
+12089351862i[TERM  ] ips = 182,952M
+12276643228i[TERM  ] ips = 187,291M
+12467884224i[TERM  ] ips = 191,241M
+12656303353i[TERM  ] ips = 188,419M
+12849135400i[TERM  ] ips = 192,832M
+13036487167i[TERM  ] ips = 187,352M
+13222764004i[TERM  ] ips = 186,277M
+13408785068i[TERM  ] ips = 186,021M
+13598582082i[TERM  ] ips = 189,797M
+13786417463i[TERM  ] ips = 187,835M
+13978447869i[TERM  ] ips = 192,030M
+14168261322i[TERM  ] ips = 189,813M
+14356674484i[TERM  ] ips = 188,413M
+14537446300i[TERM  ] ips = 180,772M
+14720753361i[TERM  ] ips = 183,307M
+14895756366i[TERM  ] ips = 175,003M
+15073811020i[TERM  ] ips = 178,055M
+15241716127i[TERM  ] ips = 167,905M
+15432029100i[TERM  ] ips = 190,313M
+15618906096i[TERM  ] ips = 186,877M
+15770699779i[TERM  ] ips = 151,794M
+15958042263i[TERM  ] ips = 187,342M
+16140375102i[TERM  ] ips = 182,333M
+16323295196i[TERM  ] ips = 182,920M
+16501257248i[TERM  ] ips = 177,962M
+16685102675i[TERM  ] ips = 183,845M
+16873976179i[TERM  ] ips = 188,874M
+17053502300i[TERM  ] ips = 179,526M
+17245414828i[TERM  ] ips = 191,913M
+17413974370i[TERM  ] ips = 168,560M
+17603006952i[TERM  ] ips = 189,033M
+17788846959i[TERM  ] ips = 185,840M
+17978927556i[TERM  ] ips = 190,081M
+18165109534i[TERM  ] ips = 186,182M
+18350966389i[TERM  ] ips = 185,857M
+18537800000i[TERM  ] ips = 186,834M
+18730079098i[TERM  ] ips = 192,279M
+18918598390i[TERM  ] ips = 188,519M
+19104511174i[TERM  ] ips = 185,913M
+19293895109i[TERM  ] ips = 189,384M
+19478522587i[TERM  ] ips = 184,627M
+19666056671i[TERM  ] ips = 187,534M
+19855852832i[TERM  ] ips = 189,796M
+20044088441i[TERM  ] ips = 188,236M
+20209864000i[TERM  ] ips = 165,776M
+20358826355i[TERM  ] ips = 148,962M
+20507130091i[TERM  ] ips = 148,304M
+20655712137i[TERM  ] ips = 148,582M
+20794252103i[TERM  ] ips = 138,540M
+20807976867p[TERM  ] >>PANIC<< Received SIGHUP: quit simulation
+20807976867i[CPU0  ] CPU is in protected mode (active)
+20807976867i[CPU0  ] CS.mode = 32 bit
+20807976867i[CPU0  ] SS.mode = 32 bit
+20807976867i[CPU0  ] EFER   = 0x00000000
+20807976867i[CPU0  ] | EAX=00000000  EBX=001d0007  ECX=c0147680  EDX=c011aff8
+20807976867i[CPU0  ] | ESP=c014763c  EBP=c0147654  ESI=0002bab0  EDI=00100ffc
+20807976867i[CPU0  ] | IOPL=0 id vip vif ac vm rf nt of df IF tf sf ZF af PF cf
+20807976867i[CPU0  ] | SEG sltr(index|ti|rpl)     base    limit G D
+20807976867i[CPU0  ] |  CS:0008( 0001| 0|  0) 00000000 ffffffff 1 1
+20807976867i[CPU0  ] |  DS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
+20807976867i[CPU0  ] |  SS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
+20807976867i[CPU0  ] |  ES:0000( 0002| 0|  0) 00000000 ffffffff 1 1
+20807976867i[CPU0  ] |  FS:0000( 0002| 0|  0) 00000000 ffffffff 1 1
+20807976867i[CPU0  ] |  GS:0000( 0002| 0|  0) 00000000 ffffffff 1 1
+20807976867i[CPU0  ] | EIP=c0110d44 (c0110d41)
+20807976867i[CPU0  ] | CR0=0xe0000011 CR2=0x100008d8
+20807976867i[CPU0  ] | CR3=0x00104000 CR4=0x00000000
+20807976867i[CPU0  ] 0xc0110d41>> mov eax, dword ptr ss:[ebp-12] : 8B45F4
+20807976867i[CMOS  ] Last time is 1615378977 (Wed Mar 10 13:22:57 2021)
+20807976867i[      ] restoring default signal behavior
+20807976867i[SIM   ] quit_sim called with exit code 1
