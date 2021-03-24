@@ -292,14 +292,18 @@ PRIVATE struct
 	{0, 0, 0, 0},
 };
 
-PUBLIC void lru_tick() {
+PUBLIC void lru_tick()
+{
 	int i = 0;
 	struct pte *pg;
 
 	for (i = 0; i < NR_FRAMES; i++)
 	{
-		pg = getpte(curr_proc, frames[i].addr);
-		frames[i].age = frames[i].age >> 1 | pg->accessed << 7;
+		if (frames[i].owner == curr_proc->pid)
+		{
+			pg = getpte(curr_proc, frames[i].addr);
+			frames[i].age = frames[i].age >> 1 | pg->accessed << (sizeof(unsigned) - 1);
+		}
 	}
 }
 
@@ -321,6 +325,7 @@ PRIVATE int allocf(void)
 	oldest = -1;
 	for (i = 0; i < NR_FRAMES; i++)
 	{
+		//kprintf("%d -> %d\n", i, frames[i].age);
 		/* Found it. */
 		if (frames[i].count == 0)
 			goto found;
