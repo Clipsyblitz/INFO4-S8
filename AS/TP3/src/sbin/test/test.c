@@ -51,7 +51,7 @@ static unsigned flags = VERBOSE | FULL;
  */
 static int swap_test(void)
 {
-	#define N 700
+	#define N 20
 	int *a, *b, *c;
 	clock_t t0, t1;
 	struct tms timing;

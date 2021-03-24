@@ -292,6 +292,17 @@ PRIVATE struct
 	{0, 0, 0, 0},
 };
 
+PUBLIC void lru_tick() {
+	int i = 0;
+	struct pte *pg;
+
+	for (i = 0; i < NR_FRAMES; i++)
+	{
+		pg = getpte(curr_proc, frames[i].addr);
+		frames[i].age = frames[i].age >> 1 | pg->accessed << 7;
+	}
+}
+
 /**
  * @brief Allocates a page frame.
  * 
@@ -302,7 +313,6 @@ PRIVATE int allocf(void)
 {
 	int i;		/* Loop index.  */
 	int oldest; /* Oldest page. */
-	struct pte *pg;
 
 #define OLDEST(x, y) (frames[x].age < frames[y].age)
 
@@ -311,18 +321,9 @@ PRIVATE int allocf(void)
 	oldest = -1;
 	for (i = 0; i < NR_FRAMES; i++)
 	{
-		pg = getpte(curr_proc, frames[i].addr);
-		frames[i].age = frames[i].age >> 1 | pg->accessed << 7;
-
 		/* Found it. */
-		if (oldest == -1 && frames[i].count == 0)
-			oldest = i;
-	}
-
-	if (oldest != -1)
-	{
-		i = oldest;
-		goto found;
+		if (frames[i].count == 0)
+			goto found;
 	}
 
 	for (i = 0; i < NR_FRAMES; i++)
