@@ -331,7 +331,9 @@ PRIVATE int allocf(void)
 				if ((oldest < 0) || (OLDEST(i, oldest)))
 					oldest = i;
 			}
-
+		}
+		if (oldest != -1)
+		{
 			pg = getpte(curr_proc, frames[oldest].addr);
 			if (pg->accessed)
 			{
