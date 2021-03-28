@@ -331,9 +331,9 @@ PRIVATE int allocf(void)
 			{
 				chosen = clock_pos;
 			}
-
-			clock_pos = (clock_pos + 1) % NR_FRAMES;
 		}
+		
+		clock_pos = (clock_pos + 1) % NR_FRAMES;
 	}
 
 	/* Swap page out. */
