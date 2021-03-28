@@ -292,6 +292,8 @@ PRIVATE struct
 	{0, 0, 0, 0},
 };
 
+PRIVATE int clock_pos = 0;
+
 /**
  * @brief Allocates a page frame.
  * 
@@ -300,14 +302,11 @@ PRIVATE struct
  */
 PRIVATE int allocf(void)
 {
-	int i;		/* Loop index.  */
-	int oldest; /* Oldest page. */
+	int chosen = -1; /* Chosen page. */
 	struct pte *pg;
-
-#define OLDEST(x, y) (frames[x].age < frames[y].age)
+	int i = 0;
 
 	/* Search for a free frame. */
-	oldest = -1;
 	for (i = 0; i < NR_FRAMES; i++)
 	{
 		/* Found it. */
@@ -315,42 +314,34 @@ PRIVATE int allocf(void)
 			goto found;
 	}
 
-	while (oldest == -1)
+	while (chosen == -1)
 	{
-
-		for (i = 0; i < NR_FRAMES; i++)
+		if (frames[clock_pos].owner == curr_proc->pid)
 		{
-			/* Local page replacement policy. */
-			if (frames[i].owner == curr_proc->pid)
-			{
-				/* Skip shared pages. */
-				if (frames[i].count > 1)
-					continue;
+			/* Skip shared pages. */
+			if (frames[clock_pos].count > 1)
+				continue;
 
-				/* Oldest page found. */
-				if ((oldest < 0) || (OLDEST(i, oldest)))
-					oldest = i;
-			}
-		}
-		if (oldest != -1)
-		{
-			pg = getpte(curr_proc, frames[oldest].addr);
+			pg = getpte(curr_proc, frames[clock_pos].addr);
 			if (pg->accessed)
 			{
 				pg->accessed--;
-				frames[oldest].age = ticks;
-				oldest = -1;
 			}
+			else
+			{
+				chosen = clock_pos;
+			}
+
+			clock_pos = (clock_pos + 1) % NR_FRAMES;
 		}
 	}
 
 	/* Swap page out. */
-	if (swap_out(curr_proc, frames[i = oldest].addr))
+	if (swap_out(curr_proc, frames[chosen].addr))
 		return (-1);
 
 found:
 
-	frames[i].age = ticks;
 	frames[i].count = 1;
 
 	return (i);
