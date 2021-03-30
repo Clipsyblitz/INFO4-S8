@@ -1,10 +1,10 @@
 # INFO4-S8
 
-* L'ordonancement par priorités se trouve sur la branche main
+* L'algorithme agging se trouve sur la branche tp3.agging
 
-* L'ordonancement multiple queue se trouve sur la branche tp1-multiple
+* L'algorithme clock se trouve sur la branche tp3.clock
 
-* L'ordonancement par lotterie se trouve sur la branche tp1-lotery
+* L'algorithme seconde chance se trouve sur la branche tp3.chance
 
 
 
